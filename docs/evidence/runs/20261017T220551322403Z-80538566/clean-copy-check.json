@@ -1,0 +1,12 @@
+{
+  "run_id": "20261017T220551322403Z-80538566",
+  "verification_timezone": "UTC",
+  "recorded_utc": "2026-10-17T22:05:51.742914+00:00",
+  "source_database_before": false,
+  "source_database_after": false,
+  "source_log_before": false,
+  "source_log_after": false,
+  "process_returncode": 0,
+  "executed_script_sha256": "1ffdd47448d4e1e6256bc4adca54e2b950c6309ebfb8fb37ccc5ed5116cd601d",
+  "note": "The clean source tree contained no original runtime database or log. Its verifier created a separate temporary runtime tree. PASS on token logging confirms the observation, not compliance with a security requirement."
+}

@@ -1,0 +1,17 @@
+{
+  "com.sciencia.focus": [
+    {"review_id":"focus-001","rating":5,"text":"Fast and easy to use. The summaries are useful.","created_at":"2026-09-01T10:15:00Z","app_version":"2.3.1","user_region":"US"},
+    {"review_id":"focus-002","rating":2,"text":"Search is slow after the latest update.","created_at":"2026-09-03T14:20:00Z","app_version":"2.3.1","user_region":"US"},
+    {"review_id":"focus-003","rating":4,"text":"Good overall but export could be clearer.","created_at":"2026-09-05T08:42:00Z","app_version":"2.3.2","user_region":"CA"}
+  ],
+  "com.sciencia.notes": [
+    {"review_id":"notes-001","rating":1,"text":"Login loop prevented me from opening my notes.","created_at":"2026-09-02T11:05:00Z","app_version":"1.8.0","user_region":"US"},
+    {"review_id":"notes-002","rating":5,"text":"Simple interface and reliable sync.","created_at":"2026-09-04T09:10:00Z","app_version":"1.8.0","user_region":"GB"},
+    {"review_id":"notes-003","rating":3,"text":"Works, but notifications are inconsistent.","created_at":"2026-09-06T16:30:00Z","app_version":"1.8.1","user_region":"US"}
+  ],
+  "com.sciencia.travel": [
+    {"review_id":"travel-001","rating":4,"text":"Trip planner is helpful and the map is clean.","created_at":"2026-09-01T07:25:00Z","app_version":"4.1.0","user_region":"AU"},
+    {"review_id":"travel-002","rating":2,"text":"The app lost my saved itinerary after an update.","created_at":"2026-09-05T18:12:00Z","app_version":"4.1.1","user_region":"US"},
+    {"review_id":"travel-003","rating":5,"text":"Very useful for keeping reservations together.","created_at":"2026-09-07T12:44:00Z","app_version":"4.1.1","user_region":"SG"}
+  ]
+}

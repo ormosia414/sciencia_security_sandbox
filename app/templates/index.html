@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sciencia AI Review Intelligence Sandbox</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <h1>Review Intelligence Sandbox</h1>
+    <p>Local training application for review ingestion and lightweight analysis.</p>
+
+    <section>
+      <h2>Ingest sample reviews</h2>
+      {% for app_id, name in apps.items() %}
+      <form action="/ingest" method="post" class="inline">
+        <input type="hidden" name="app_id" value="{{ app_id }}">
+        <button type="submit">Ingest {{ name }}</button>
+        <span>{{ counts.get(app_id, 0) }} stored reviews</span>
+      </form>
+      {% endfor %}
+    </section>
+
+    <section>
+      <h2>Useful endpoints</h2>
+      <ul>
+        <li><code>/reviews?app_id=com.sciencia.focus&q=useful</code></li>
+        <li><code>/analysis/summary?app_id=com.sciencia.focus</code></li>
+        <li><code>/admin/runs</code></li>
+        <li><code>/export.csv</code></li>
+        <li><code>/health</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

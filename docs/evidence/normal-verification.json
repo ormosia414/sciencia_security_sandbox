@@ -1,0 +1,2764 @@
+{
+  "verification_date": "2026-10-17",
+  "recorded_utc": "2026-10-17T20:52:05.176953+00:00",
+  "project_root": "<PROJECT_ROOT>",
+  "runtime_copy": "<TEMP_RUNTIME>",
+  "base_url": "http://127.0.0.1:<LOCAL_PORT>",
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "sqlite": "3.51.0",
+  "packages": {
+    "Flask": "3.0.3",
+    "Werkzeug": "3.1.9",
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.3",
+    "itsdangerous": "2.2.0",
+    "click": "8.1.8",
+    "blinker": "1.9.0"
+  },
+  "pytest_installed": false,
+  "startup_command": [
+    "<PYTHON_EXECUTABLE>",
+    "<TEMP_RUNTIME>/launch.py",
+    "<LOCAL_PORT>"
+  ],
+  "startup_wrapper": "import sys\nfrom pathlib import Path\nsys.path.insert(0, str(Path(__file__).parent / 'app'))\nimport app\napp.init_db()\napp.app.run(host='127.0.0.1', port=int(sys.argv[1]), debug=app.ENABLE_DEBUG, use_reloader=False)\n",
+  "config_flags": {
+    "ENABLE_DEBUG": true,
+    "LOG_REQUEST_DETAILS": true
+  },
+  "manifest": [
+    {
+      "file": ".DS_Store",
+      "bytes": 6148,
+      "sha256": "070817e04307ad321c96a61bb5ac8a66e1ea9303e6182cffd082cb132577238f",
+      "review": "Inventoried and hashed; OS metadata, not application content"
+    },
+    {
+      "file": ".gitignore",
+      "bytes": 63,
+      "sha256": "5ff138f39bff0810331750a99ba68cecb8c0c67d3f3d55bf66a1e17879b5c6f5",
+      "review": "Read in full"
+    },
+    {
+      "file": "README.md",
+      "bytes": 1565,
+      "sha256": "82884642a5db4b9eeead95d03b506c36e390b95897c2c85a6a17a573e22a7e60",
+      "review": "Read in full"
+    },
+    {
+      "file": "SECURITY_SCOPE.md",
+      "bytes": 865,
+      "sha256": "3c6e169df0f88e2dad2c9d679fa9640b69e757b41a5097ba76ee01ee3434e304",
+      "review": "Read in full"
+    },
+    {
+      "file": "STUDENT_START_HERE.md",
+      "bytes": 786,
+      "sha256": "ea628ef6882e66c0a0c21af8b9b009765fc8caf94229f928866bac032c5d8b6a",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/.DS_Store",
+      "bytes": 6148,
+      "sha256": "b8d914e5d80f7419d8123e315055b110a26b9a39c3bcff9f768bb15d2bc3a29a",
+      "review": "Inventoried and hashed; OS metadata, not application content"
+    },
+    {
+      "file": "app/app.py",
+      "bytes": 5401,
+      "sha256": "bd077abbdb14f84e00339999f9c28e69a9618048c444f37f9aaf8e12c6f9debf",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/config.py",
+      "bytes": 230,
+      "sha256": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/db.py",
+      "bytes": 1544,
+      "sha256": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/security-notes.md",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/static/style.css",
+      "bytes": 390,
+      "sha256": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+      "review": "Read in full"
+    },
+    {
+      "file": "app/templates/index.html",
+      "bytes": 1094,
+      "sha256": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+      "review": "Read in full"
+    },
+    {
+      "file": "data/provider_reviews.json",
+      "bytes": 1647,
+      "sha256": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+      "review": "Read in full"
+    },
+    {
+      "file": "data/reviews.db",
+      "bytes": 28672,
+      "sha256": "c28c72ca7e305ee6dd97c9586aaf11ad8451fcfd8846fd4ed0b3c7fa4074f16c",
+      "review": "Read-only SQLite: all table definitions and rows inspected"
+    },
+    {
+      "file": "docs/system-overview.md",
+      "bytes": 15498,
+      "sha256": "f9c75f8b1e226f2c559302a339f969b96eb154bd8135270228b9670c36c8086e",
+      "review": "Read in full"
+    },
+    {
+      "file": "docs/system_overview.md",
+      "bytes": 702,
+      "sha256": "c6d468a6f7b614eff36badcb1883d337c6ceea92d95ff55cdaa6d2c921160392",
+      "review": "Read in full"
+    },
+    {
+      "file": "docs/verification-results.md",
+      "bytes": 13854,
+      "sha256": "98a0600ff81e28463b92b28e74e310e79a437772cb1c5092a1f6966a07544770",
+      "review": "Read in full"
+    },
+    {
+      "file": "docs/verify_normal.py",
+      "bytes": 19889,
+      "sha256": "facaa9f717fda42c37bbcd7ff73b9549fac4f3adafcadc499fbbe28820fb6e15",
+      "review": "Read in full"
+    },
+    {
+      "file": "logs/app.log",
+      "bytes": 7511,
+      "sha256": "e70febf382761acb5edb2bc2d5e4e749b2bdf9df92a28785eda561086fd71946",
+      "review": "Read in full; sensitive values removed from shared output"
+    },
+    {
+      "file": "requirements.txt",
+      "bytes": 13,
+      "sha256": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+      "review": "Read in full"
+    },
+    {
+      "file": "tests/test_smoke.py",
+      "bytes": 398,
+      "sha256": "3c37a9ca8fd7aec010dd6bea9d657ae8c9e4ee11e179f03d07ed010cf136940e",
+      "review": "Read in full"
+    }
+  ],
+  "original_db": {
+    "apps": {
+      "definition": "CREATE TABLE apps (\n                app_id TEXT PRIMARY KEY,\n                display_name TEXT NOT NULL\n            )",
+      "rows": 2,
+      "content_sha256": "e8d2b3676d46fbd35b641badfba14ba071ead949d8395865ad3a7193d9fad1f9"
+    },
+    "reviews": {
+      "definition": "CREATE TABLE reviews (\n                review_id TEXT PRIMARY KEY,\n                app_id TEXT NOT NULL,\n                rating INTEGER NOT NULL,\n                text TEXT NOT NULL,\n                created_at TEXT NOT NULL,\n                app_version TEXT,\n                user_region TEXT,\n                ingested_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "rows": 6,
+      "content_sha256": "e718206edd6767bcc196d2abe5f8eaddd62207fba673e998f99f71f0ff5de430"
+    },
+    "ingestion_runs": {
+      "definition": "CREATE TABLE ingestion_runs (\n                run_id INTEGER PRIMARY KEY AUTOINCREMENT,\n                app_id TEXT NOT NULL,\n                started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                fetched_count INTEGER NOT NULL,\n                inserted_count INTEGER NOT NULL,\n                status TEXT NOT NULL,\n                message TEXT,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "rows": 2,
+      "content_sha256": "b4e951d2068e36fe54adafb3298881ef73f86372eb5ecf85747ba0a7a2a4385d"
+    },
+    "sqlite_sequence": {
+      "definition": "CREATE TABLE sqlite_sequence(name,seq)",
+      "rows": 1,
+      "content_sha256": "f2aaea9932ca14cbb6a48b716b561221d4c05cc42dbbe1c6ea5223c00f258793"
+    }
+  },
+  "provider": {
+    "com.sciencia.focus": {
+      "name": "Focus AI",
+      "count": 3,
+      "fields": [
+        "app_version",
+        "created_at",
+        "rating",
+        "review_id",
+        "text",
+        "user_region"
+      ],
+      "review_ids": [
+        "focus-001",
+        "focus-002",
+        "focus-003"
+      ]
+    },
+    "com.sciencia.notes": {
+      "name": "Smart Notes",
+      "count": 3,
+      "fields": [
+        "app_version",
+        "created_at",
+        "rating",
+        "review_id",
+        "text",
+        "user_region"
+      ],
+      "review_ids": [
+        "notes-001",
+        "notes-002",
+        "notes-003"
+      ]
+    },
+    "com.sciencia.travel": {
+      "name": "Travel Companion",
+      "count": 3,
+      "fields": [
+        "app_version",
+        "created_at",
+        "rating",
+        "review_id",
+        "text",
+        "user_region"
+      ],
+      "review_ids": [
+        "travel-001",
+        "travel-002",
+        "travel-003"
+      ]
+    }
+  },
+  "ingestion": [
+    {
+      "app_id": "com.sciencia.focus",
+      "fetched": 3,
+      "inserted": 3,
+      "repeat": false,
+      "database_counts": {
+        "apps": 1,
+        "reviews": 3,
+        "ingestion_runs": 1
+      }
+    },
+    {
+      "app_id": "com.sciencia.notes",
+      "fetched": 3,
+      "inserted": 3,
+      "repeat": false,
+      "database_counts": {
+        "apps": 2,
+        "reviews": 6,
+        "ingestion_runs": 2
+      }
+    },
+    {
+      "app_id": "com.sciencia.travel",
+      "fetched": 3,
+      "inserted": 3,
+      "repeat": false,
+      "database_counts": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 3
+      }
+    },
+    {
+      "app_id": "com.sciencia.focus",
+      "fetched": 3,
+      "inserted": 0,
+      "repeat": true,
+      "database_counts": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 4
+      }
+    },
+    {
+      "app_id": "com.sciencia.notes",
+      "fetched": 3,
+      "inserted": 0,
+      "repeat": true,
+      "database_counts": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 5
+      }
+    },
+    {
+      "app_id": "com.sciencia.travel",
+      "fetched": 3,
+      "inserted": 0,
+      "repeat": true,
+      "database_counts": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 6
+      }
+    }
+  ],
+  "queries": [
+    {
+      "label": "all",
+      "params": {},
+      "review_ids": [
+        "travel-003",
+        "notes-003",
+        "travel-002",
+        "focus-003",
+        "notes-002",
+        "focus-002",
+        "notes-001",
+        "focus-001",
+        "travel-001"
+      ]
+    },
+    {
+      "label": "com.sciencia.focus",
+      "params": {
+        "app_id": "com.sciencia.focus"
+      },
+      "review_ids": [
+        "focus-003",
+        "focus-002",
+        "focus-001"
+      ]
+    },
+    {
+      "label": "com.sciencia.notes",
+      "params": {
+        "app_id": "com.sciencia.notes"
+      },
+      "review_ids": [
+        "notes-003",
+        "notes-002",
+        "notes-001"
+      ]
+    },
+    {
+      "label": "com.sciencia.travel",
+      "params": {
+        "app_id": "com.sciencia.travel"
+      },
+      "review_ids": [
+        "travel-003",
+        "travel-002",
+        "travel-001"
+      ]
+    },
+    {
+      "label": "ordinary match",
+      "params": {
+        "q": "useful"
+      },
+      "review_ids": [
+        "travel-003",
+        "focus-001"
+      ]
+    },
+    {
+      "label": "application and keyword",
+      "params": {
+        "app_id": "com.sciencia.focus",
+        "q": "useful"
+      },
+      "review_ids": [
+        "focus-001"
+      ]
+    },
+    {
+      "label": "ordinary no match",
+      "params": {
+        "q": "unfindableword"
+      },
+      "review_ids": []
+    }
+  ],
+  "summaries": [
+    {
+      "app_id": "com.sciencia.focus",
+      "result": {
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "summaries",
+            1
+          ],
+          [
+            "useful",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ],
+        "review_count": 3
+      }
+    },
+    {
+      "app_id": "com.sciencia.notes",
+      "result": {
+        "average_rating": 3.0,
+        "common_terms": [
+          [
+            "login",
+            1
+          ],
+          [
+            "prevented",
+            1
+          ],
+          [
+            "opening",
+            1
+          ],
+          [
+            "notes",
+            1
+          ],
+          [
+            "simple",
+            1
+          ],
+          [
+            "interface",
+            1
+          ],
+          [
+            "reliable",
+            1
+          ],
+          [
+            "sync",
+            1
+          ]
+        ],
+        "review_count": 3
+      }
+    },
+    {
+      "app_id": "com.sciencia.travel",
+      "result": {
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "planner",
+            1
+          ],
+          [
+            "helpful",
+            1
+          ],
+          [
+            "clean",
+            1
+          ],
+          [
+            "saved",
+            1
+          ],
+          [
+            "itinerary",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "useful",
+            1
+          ]
+        ],
+        "review_count": 3
+      }
+    },
+    {
+      "app_id": "all",
+      "result": {
+        "average_rating": 3.44,
+        "common_terms": [
+          [
+            "useful",
+            2
+          ],
+          [
+            "after",
+            2
+          ],
+          [
+            "update",
+            2
+          ],
+          [
+            "summaries",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ],
+        "review_count": 9
+      }
+    }
+  ],
+  "history": [
+    {
+      "app_id": "com.sciencia.travel",
+      "fetched_count": 3,
+      "inserted_count": 0,
+      "message": "mock provider ingestion completed",
+      "run_id": 6,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    },
+    {
+      "app_id": "com.sciencia.notes",
+      "fetched_count": 3,
+      "inserted_count": 0,
+      "message": "mock provider ingestion completed",
+      "run_id": 5,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    },
+    {
+      "app_id": "com.sciencia.focus",
+      "fetched_count": 3,
+      "inserted_count": 0,
+      "message": "mock provider ingestion completed",
+      "run_id": 4,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    },
+    {
+      "app_id": "com.sciencia.travel",
+      "fetched_count": 3,
+      "inserted_count": 3,
+      "message": "mock provider ingestion completed",
+      "run_id": 3,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    },
+    {
+      "app_id": "com.sciencia.notes",
+      "fetched_count": 3,
+      "inserted_count": 3,
+      "message": "mock provider ingestion completed",
+      "run_id": 2,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    },
+    {
+      "app_id": "com.sciencia.focus",
+      "fetched_count": 3,
+      "inserted_count": 3,
+      "message": "mock provider ingestion completed",
+      "run_id": 1,
+      "started_at": "2026-10-17 20:52:05",
+      "status": "SUCCESS"
+    }
+  ],
+  "csv": {
+    "header": [
+      "review_id",
+      "app_id",
+      "rating",
+      "text",
+      "created_at",
+      "app_version",
+      "user_region",
+      "ingested_at"
+    ],
+    "rows": 9,
+    "comma_review_ids": [
+      "notes-003"
+    ],
+    "per_app": {
+      "com.sciencia.focus": 3,
+      "com.sciencia.notes": 3,
+      "com.sciencia.travel": 3
+    }
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 1521
+    },
+    {
+      "method": "GET",
+      "path": "/static/style.css",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 390
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.focus"
+      },
+      "status": 200,
+      "bytes": 70
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.notes"
+      },
+      "status": 200,
+      "bytes": 70
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.travel"
+      },
+      "status": 200,
+      "bytes": 71
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.focus"
+      },
+      "status": 200,
+      "bytes": 70
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.notes"
+      },
+      "status": 200,
+      "bytes": 70
+    },
+    {
+      "method": "POST",
+      "path": "/ingest",
+      "params": {},
+      "form": {
+        "app_id": "com.sciencia.travel"
+      },
+      "status": 200,
+      "bytes": 71
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 1521
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 2216
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "app_id": "com.sciencia.focus"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 736
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "app_id": "com.sciencia.notes"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 732
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "app_id": "com.sciencia.travel"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 754
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "q": "useful"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 502
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "app_id": "com.sciencia.focus",
+        "q": "useful"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 252
+    },
+    {
+      "method": "GET",
+      "path": "/reviews",
+      "params": {
+        "q": "unfindableword"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 3
+    },
+    {
+      "method": "GET",
+      "path": "/analysis/summary",
+      "params": {
+        "app_id": "com.sciencia.focus"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 373
+    },
+    {
+      "method": "GET",
+      "path": "/analysis/summary",
+      "params": {
+        "app_id": "com.sciencia.notes"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 374
+    },
+    {
+      "method": "GET",
+      "path": "/analysis/summary",
+      "params": {
+        "app_id": "com.sciencia.travel"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 372
+    },
+    {
+      "method": "GET",
+      "path": "/analysis/summary",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 373
+    },
+    {
+      "method": "GET",
+      "path": "/admin/runs",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 1373
+    },
+    {
+      "method": "GET",
+      "path": "/export.csv",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 1221
+    },
+    {
+      "method": "GET",
+      "path": "/export.db",
+      "params": {
+        "token": "[REDACTED]"
+      },
+      "form": null,
+      "status": 200,
+      "bytes": 28672
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "params": {},
+      "form": null,
+      "status": 200,
+      "bytes": 67
+    }
+  ],
+  "existing_test": {
+    "command": [
+      "<PYTHON_EXECUTABLE>",
+      "-c",
+      "import runpy; m=runpy.run_path('tests/test_smoke.py'); m['test_health'](); print('test_health: PASS')"
+    ],
+    "returncode": 0,
+    "stdout": "test_health: PASS\n",
+    "stderr": "",
+    "runner": "direct function invocation; not pytest"
+  },
+  "checks": [
+    {
+      "check": "Provider applications match UI mapping",
+      "expected": [
+        "com.sciencia.focus",
+        "com.sciencia.notes",
+        "com.sciencia.travel"
+      ],
+      "actual": [
+        "com.sciencia.focus",
+        "com.sciencia.notes",
+        "com.sciencia.travel"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Provider review IDs are unique",
+      "expected": 9,
+      "actual": 9,
+      "status": "PASS"
+    },
+    {
+      "check": "All provider records have the six expected fields",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Sample field types and ratings",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Copied source and configuration bytes",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Fresh database counts",
+      "expected": {
+        "apps": 0,
+        "reviews": 0,
+        "ingestion_runs": 0
+      },
+      "actual": {
+        "apps": 0,
+        "reviews": 0,
+        "ingestion_runs": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Empty homepage forms, names, CSS link and zero counts",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "CSS exact bytes and MIME",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "First import com.sciencia.focus",
+      "expected": {
+        "app_id": "com.sciencia.focus",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "actual": {
+        "app_id": "com.sciencia.focus",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 1",
+      "expected": {
+        "apps": 1,
+        "reviews": 3,
+        "ingestion_runs": 1
+      },
+      "actual": {
+        "apps": 1,
+        "reviews": 3,
+        "ingestion_runs": 1
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "First import com.sciencia.notes",
+      "expected": {
+        "app_id": "com.sciencia.notes",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "actual": {
+        "app_id": "com.sciencia.notes",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 2",
+      "expected": {
+        "apps": 2,
+        "reviews": 6,
+        "ingestion_runs": 2
+      },
+      "actual": {
+        "apps": 2,
+        "reviews": 6,
+        "ingestion_runs": 2
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "First import com.sciencia.travel",
+      "expected": {
+        "app_id": "com.sciencia.travel",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "actual": {
+        "app_id": "com.sciencia.travel",
+        "fetched": 3,
+        "inserted": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 3",
+      "expected": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 3
+      },
+      "actual": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Repeat import com.sciencia.focus",
+      "expected": {
+        "app_id": "com.sciencia.focus",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "actual": {
+        "app_id": "com.sciencia.focus",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 4",
+      "expected": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 4
+      },
+      "actual": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 4
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Repeat import com.sciencia.notes",
+      "expected": {
+        "app_id": "com.sciencia.notes",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "actual": {
+        "app_id": "com.sciencia.notes",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 5",
+      "expected": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 5
+      },
+      "actual": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 5
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Repeat import com.sciencia.travel",
+      "expected": {
+        "app_id": "com.sciencia.travel",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "actual": {
+        "app_id": "com.sciencia.travel",
+        "fetched": 3,
+        "inserted": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Database counts after import 6",
+      "expected": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 6
+      },
+      "actual": {
+        "apps": 3,
+        "reviews": 9,
+        "ingestion_runs": 6
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Every stored review matches provider fields",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Stored application mapping",
+      "expected": {
+        "com.sciencia.focus": "Focus AI",
+        "com.sciencia.notes": "Smart Notes",
+        "com.sciencia.travel": "Travel Companion"
+      },
+      "actual": {
+        "com.sciencia.focus": "Focus AI",
+        "com.sciencia.notes": "Smart Notes",
+        "com.sciencia.travel": "Travel Companion"
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Populated homepage counts",
+      "expected": 3,
+      "actual": 3,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: all",
+      "expected": [
+        {
+          "review_id": "travel-003",
+          "rating": 5,
+          "text": "Very useful for keeping reservations together.",
+          "created_at": "2026-09-07T12:44:00Z",
+          "app_version": "4.1.1",
+          "user_region": "SG",
+          "app_id": "com.sciencia.travel"
+        },
+        {
+          "review_id": "notes-003",
+          "rating": 3,
+          "text": "Works, but notifications are inconsistent.",
+          "created_at": "2026-09-06T16:30:00Z",
+          "app_version": "1.8.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.notes"
+        },
+        {
+          "review_id": "travel-002",
+          "rating": 2,
+          "text": "The app lost my saved itinerary after an update.",
+          "created_at": "2026-09-05T18:12:00Z",
+          "app_version": "4.1.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.travel"
+        },
+        {
+          "review_id": "focus-003",
+          "rating": 4,
+          "text": "Good overall but export could be clearer.",
+          "created_at": "2026-09-05T08:42:00Z",
+          "app_version": "2.3.2",
+          "user_region": "CA",
+          "app_id": "com.sciencia.focus"
+        },
+        {
+          "review_id": "notes-002",
+          "rating": 5,
+          "text": "Simple interface and reliable sync.",
+          "created_at": "2026-09-04T09:10:00Z",
+          "app_version": "1.8.0",
+          "user_region": "GB",
+          "app_id": "com.sciencia.notes"
+        },
+        {
+          "review_id": "focus-002",
+          "rating": 2,
+          "text": "Search is slow after the latest update.",
+          "created_at": "2026-09-03T14:20:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        },
+        {
+          "review_id": "notes-001",
+          "rating": 1,
+          "text": "Login loop prevented me from opening my notes.",
+          "created_at": "2026-09-02T11:05:00Z",
+          "app_version": "1.8.0",
+          "user_region": "US",
+          "app_id": "com.sciencia.notes"
+        },
+        {
+          "review_id": "focus-001",
+          "rating": 5,
+          "text": "Fast and easy to use. The summaries are useful.",
+          "created_at": "2026-09-01T10:15:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        },
+        {
+          "review_id": "travel-001",
+          "rating": 4,
+          "text": "Trip planner is helpful and the map is clean.",
+          "created_at": "2026-09-01T07:25:00Z",
+          "app_version": "4.1.0",
+          "user_region": "AU",
+          "app_id": "com.sciencia.travel"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.1",
+          "created_at": "2026-09-07T12:44:00Z",
+          "rating": 5,
+          "review_id": "travel-003",
+          "text": "Very useful for keeping reservations together.",
+          "user_region": "SG"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.1",
+          "created_at": "2026-09-06T16:30:00Z",
+          "rating": 3,
+          "review_id": "notes-003",
+          "text": "Works, but notifications are inconsistent.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.1",
+          "created_at": "2026-09-05T18:12:00Z",
+          "rating": 2,
+          "review_id": "travel-002",
+          "text": "The app lost my saved itinerary after an update.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.2",
+          "created_at": "2026-09-05T08:42:00Z",
+          "rating": 4,
+          "review_id": "focus-003",
+          "text": "Good overall but export could be clearer.",
+          "user_region": "CA"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.0",
+          "created_at": "2026-09-04T09:10:00Z",
+          "rating": 5,
+          "review_id": "notes-002",
+          "text": "Simple interface and reliable sync.",
+          "user_region": "GB"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-03T14:20:00Z",
+          "rating": 2,
+          "review_id": "focus-002",
+          "text": "Search is slow after the latest update.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.0",
+          "created_at": "2026-09-02T11:05:00Z",
+          "rating": 1,
+          "review_id": "notes-001",
+          "text": "Login loop prevented me from opening my notes.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-01T10:15:00Z",
+          "rating": 5,
+          "review_id": "focus-001",
+          "text": "Fast and easy to use. The summaries are useful.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.0",
+          "created_at": "2026-09-01T07:25:00Z",
+          "rating": 4,
+          "review_id": "travel-001",
+          "text": "Trip planner is helpful and the map is clean.",
+          "user_region": "AU"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: all",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: com.sciencia.focus",
+      "expected": [
+        {
+          "review_id": "focus-003",
+          "rating": 4,
+          "text": "Good overall but export could be clearer.",
+          "created_at": "2026-09-05T08:42:00Z",
+          "app_version": "2.3.2",
+          "user_region": "CA",
+          "app_id": "com.sciencia.focus"
+        },
+        {
+          "review_id": "focus-002",
+          "rating": 2,
+          "text": "Search is slow after the latest update.",
+          "created_at": "2026-09-03T14:20:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        },
+        {
+          "review_id": "focus-001",
+          "rating": 5,
+          "text": "Fast and easy to use. The summaries are useful.",
+          "created_at": "2026-09-01T10:15:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.2",
+          "created_at": "2026-09-05T08:42:00Z",
+          "rating": 4,
+          "review_id": "focus-003",
+          "text": "Good overall but export could be clearer.",
+          "user_region": "CA"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-03T14:20:00Z",
+          "rating": 2,
+          "review_id": "focus-002",
+          "text": "Search is slow after the latest update.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-01T10:15:00Z",
+          "rating": 5,
+          "review_id": "focus-001",
+          "text": "Fast and easy to use. The summaries are useful.",
+          "user_region": "US"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: com.sciencia.focus",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: com.sciencia.notes",
+      "expected": [
+        {
+          "review_id": "notes-003",
+          "rating": 3,
+          "text": "Works, but notifications are inconsistent.",
+          "created_at": "2026-09-06T16:30:00Z",
+          "app_version": "1.8.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.notes"
+        },
+        {
+          "review_id": "notes-002",
+          "rating": 5,
+          "text": "Simple interface and reliable sync.",
+          "created_at": "2026-09-04T09:10:00Z",
+          "app_version": "1.8.0",
+          "user_region": "GB",
+          "app_id": "com.sciencia.notes"
+        },
+        {
+          "review_id": "notes-001",
+          "rating": 1,
+          "text": "Login loop prevented me from opening my notes.",
+          "created_at": "2026-09-02T11:05:00Z",
+          "app_version": "1.8.0",
+          "user_region": "US",
+          "app_id": "com.sciencia.notes"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.1",
+          "created_at": "2026-09-06T16:30:00Z",
+          "rating": 3,
+          "review_id": "notes-003",
+          "text": "Works, but notifications are inconsistent.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.0",
+          "created_at": "2026-09-04T09:10:00Z",
+          "rating": 5,
+          "review_id": "notes-002",
+          "text": "Simple interface and reliable sync.",
+          "user_region": "GB"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "app_version": "1.8.0",
+          "created_at": "2026-09-02T11:05:00Z",
+          "rating": 1,
+          "review_id": "notes-001",
+          "text": "Login loop prevented me from opening my notes.",
+          "user_region": "US"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: com.sciencia.notes",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: com.sciencia.travel",
+      "expected": [
+        {
+          "review_id": "travel-003",
+          "rating": 5,
+          "text": "Very useful for keeping reservations together.",
+          "created_at": "2026-09-07T12:44:00Z",
+          "app_version": "4.1.1",
+          "user_region": "SG",
+          "app_id": "com.sciencia.travel"
+        },
+        {
+          "review_id": "travel-002",
+          "rating": 2,
+          "text": "The app lost my saved itinerary after an update.",
+          "created_at": "2026-09-05T18:12:00Z",
+          "app_version": "4.1.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.travel"
+        },
+        {
+          "review_id": "travel-001",
+          "rating": 4,
+          "text": "Trip planner is helpful and the map is clean.",
+          "created_at": "2026-09-01T07:25:00Z",
+          "app_version": "4.1.0",
+          "user_region": "AU",
+          "app_id": "com.sciencia.travel"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.1",
+          "created_at": "2026-09-07T12:44:00Z",
+          "rating": 5,
+          "review_id": "travel-003",
+          "text": "Very useful for keeping reservations together.",
+          "user_region": "SG"
+        },
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.1",
+          "created_at": "2026-09-05T18:12:00Z",
+          "rating": 2,
+          "review_id": "travel-002",
+          "text": "The app lost my saved itinerary after an update.",
+          "user_region": "US"
+        },
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.0",
+          "created_at": "2026-09-01T07:25:00Z",
+          "rating": 4,
+          "review_id": "travel-001",
+          "text": "Trip planner is helpful and the map is clean.",
+          "user_region": "AU"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: com.sciencia.travel",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: ordinary match",
+      "expected": [
+        {
+          "review_id": "travel-003",
+          "rating": 5,
+          "text": "Very useful for keeping reservations together.",
+          "created_at": "2026-09-07T12:44:00Z",
+          "app_version": "4.1.1",
+          "user_region": "SG",
+          "app_id": "com.sciencia.travel"
+        },
+        {
+          "review_id": "focus-001",
+          "rating": 5,
+          "text": "Fast and easy to use. The summaries are useful.",
+          "created_at": "2026-09-01T10:15:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.travel",
+          "app_version": "4.1.1",
+          "created_at": "2026-09-07T12:44:00Z",
+          "rating": 5,
+          "review_id": "travel-003",
+          "text": "Very useful for keeping reservations together.",
+          "user_region": "SG"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-01T10:15:00Z",
+          "rating": 5,
+          "review_id": "focus-001",
+          "text": "Fast and easy to use. The summaries are useful.",
+          "user_region": "US"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: ordinary match",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: application and keyword",
+      "expected": [
+        {
+          "review_id": "focus-001",
+          "rating": 5,
+          "text": "Fast and easy to use. The summaries are useful.",
+          "created_at": "2026-09-01T10:15:00Z",
+          "app_version": "2.3.1",
+          "user_region": "US",
+          "app_id": "com.sciencia.focus"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.focus",
+          "app_version": "2.3.1",
+          "created_at": "2026-09-01T10:15:00Z",
+          "rating": 5,
+          "review_id": "focus-001",
+          "text": "Fast and easy to use. The summaries are useful.",
+          "user_region": "US"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: application and keyword",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Query values, fields and descending dates: ordinary no match",
+      "expected": [],
+      "actual": [],
+      "status": "PASS"
+    },
+    {
+      "check": "Query response field set: ordinary no match",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Independent summary: com.sciencia.focus",
+      "expected": {
+        "review_count": 3,
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "summaries",
+            1
+          ],
+          [
+            "useful",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ]
+      },
+      "actual": {
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "summaries",
+            1
+          ],
+          [
+            "useful",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ],
+        "review_count": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Independent summary: com.sciencia.notes",
+      "expected": {
+        "review_count": 3,
+        "average_rating": 3.0,
+        "common_terms": [
+          [
+            "login",
+            1
+          ],
+          [
+            "prevented",
+            1
+          ],
+          [
+            "opening",
+            1
+          ],
+          [
+            "notes",
+            1
+          ],
+          [
+            "simple",
+            1
+          ],
+          [
+            "interface",
+            1
+          ],
+          [
+            "reliable",
+            1
+          ],
+          [
+            "sync",
+            1
+          ]
+        ]
+      },
+      "actual": {
+        "average_rating": 3.0,
+        "common_terms": [
+          [
+            "login",
+            1
+          ],
+          [
+            "prevented",
+            1
+          ],
+          [
+            "opening",
+            1
+          ],
+          [
+            "notes",
+            1
+          ],
+          [
+            "simple",
+            1
+          ],
+          [
+            "interface",
+            1
+          ],
+          [
+            "reliable",
+            1
+          ],
+          [
+            "sync",
+            1
+          ]
+        ],
+        "review_count": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Independent summary: com.sciencia.travel",
+      "expected": {
+        "review_count": 3,
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "planner",
+            1
+          ],
+          [
+            "helpful",
+            1
+          ],
+          [
+            "clean",
+            1
+          ],
+          [
+            "saved",
+            1
+          ],
+          [
+            "itinerary",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "useful",
+            1
+          ]
+        ]
+      },
+      "actual": {
+        "average_rating": 3.67,
+        "common_terms": [
+          [
+            "planner",
+            1
+          ],
+          [
+            "helpful",
+            1
+          ],
+          [
+            "clean",
+            1
+          ],
+          [
+            "saved",
+            1
+          ],
+          [
+            "itinerary",
+            1
+          ],
+          [
+            "after",
+            1
+          ],
+          [
+            "update",
+            1
+          ],
+          [
+            "useful",
+            1
+          ]
+        ],
+        "review_count": 3
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "Independent summary: all",
+      "expected": {
+        "review_count": 9,
+        "average_rating": 3.44,
+        "common_terms": [
+          [
+            "useful",
+            2
+          ],
+          [
+            "after",
+            2
+          ],
+          [
+            "update",
+            2
+          ],
+          [
+            "summaries",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ]
+      },
+      "actual": {
+        "average_rating": 3.44,
+        "common_terms": [
+          [
+            "useful",
+            2
+          ],
+          [
+            "after",
+            2
+          ],
+          [
+            "update",
+            2
+          ],
+          [
+            "summaries",
+            1
+          ],
+          [
+            "search",
+            1
+          ],
+          [
+            "latest",
+            1
+          ],
+          [
+            "overall",
+            1
+          ],
+          [
+            "export",
+            1
+          ]
+        ],
+        "review_count": 9
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "History count and descending IDs",
+      "expected": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "actual": [
+        6,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "History fields and run contents",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "History response matches all database rows",
+      "expected": [
+        {
+          "run_id": 6,
+          "app_id": "com.sciencia.travel",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        },
+        {
+          "run_id": 5,
+          "app_id": "com.sciencia.notes",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        },
+        {
+          "run_id": 4,
+          "app_id": "com.sciencia.focus",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        },
+        {
+          "run_id": 3,
+          "app_id": "com.sciencia.travel",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        },
+        {
+          "run_id": 2,
+          "app_id": "com.sciencia.notes",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        },
+        {
+          "run_id": 1,
+          "app_id": "com.sciencia.focus",
+          "started_at": "2026-10-17 20:52:05",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "status": "SUCCESS",
+          "message": "mock provider ingestion completed"
+        }
+      ],
+      "actual": [
+        {
+          "app_id": "com.sciencia.travel",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "message": "mock provider ingestion completed",
+          "run_id": 6,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "message": "mock provider ingestion completed",
+          "run_id": 5,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "fetched_count": 3,
+          "inserted_count": 0,
+          "message": "mock provider ingestion completed",
+          "run_id": 4,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        },
+        {
+          "app_id": "com.sciencia.travel",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "message": "mock provider ingestion completed",
+          "run_id": 3,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        },
+        {
+          "app_id": "com.sciencia.notes",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "message": "mock provider ingestion completed",
+          "run_id": 2,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        },
+        {
+          "app_id": "com.sciencia.focus",
+          "fetched_count": 3,
+          "inserted_count": 3,
+          "message": "mock provider ingestion completed",
+          "run_id": 1,
+          "started_at": "2026-10-17 20:52:05",
+          "status": "SUCCESS"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "CSV header",
+      "expected": [
+        "review_id",
+        "app_id",
+        "rating",
+        "text",
+        "created_at",
+        "app_version",
+        "user_region",
+        "ingested_at"
+      ],
+      "actual": [
+        "review_id",
+        "app_id",
+        "rating",
+        "text",
+        "created_at",
+        "app_version",
+        "user_region",
+        "ingested_at"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "CSV row count",
+      "expected": 9,
+      "actual": 9,
+      "status": "PASS"
+    },
+    {
+      "check": "All CSV fields and values",
+      "expected": [
+        [
+          "focus-001",
+          "com.sciencia.focus",
+          "5",
+          "Fast and easy to use. The summaries are useful.",
+          "2026-09-01T10:15:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-002",
+          "com.sciencia.focus",
+          "2",
+          "Search is slow after the latest update.",
+          "2026-09-03T14:20:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-003",
+          "com.sciencia.focus",
+          "4",
+          "Good overall but export could be clearer.",
+          "2026-09-05T08:42:00Z",
+          "2.3.2",
+          "CA",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-001",
+          "com.sciencia.notes",
+          "1",
+          "Login loop prevented me from opening my notes.",
+          "2026-09-02T11:05:00Z",
+          "1.8.0",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-002",
+          "com.sciencia.notes",
+          "5",
+          "Simple interface and reliable sync.",
+          "2026-09-04T09:10:00Z",
+          "1.8.0",
+          "GB",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-003",
+          "com.sciencia.notes",
+          "3",
+          "Works, but notifications are inconsistent.",
+          "2026-09-06T16:30:00Z",
+          "1.8.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-001",
+          "com.sciencia.travel",
+          "4",
+          "Trip planner is helpful and the map is clean.",
+          "2026-09-01T07:25:00Z",
+          "4.1.0",
+          "AU",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-002",
+          "com.sciencia.travel",
+          "2",
+          "The app lost my saved itinerary after an update.",
+          "2026-09-05T18:12:00Z",
+          "4.1.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-003",
+          "com.sciencia.travel",
+          "5",
+          "Very useful for keeping reservations together.",
+          "2026-09-07T12:44:00Z",
+          "4.1.1",
+          "SG",
+          "2026-10-17 20:52:05"
+        ]
+      ],
+      "actual": [
+        [
+          "focus-001",
+          "com.sciencia.focus",
+          "5",
+          "Fast and easy to use. The summaries are useful.",
+          "2026-09-01T10:15:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-002",
+          "com.sciencia.focus",
+          "2",
+          "Search is slow after the latest update.",
+          "2026-09-03T14:20:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-003",
+          "com.sciencia.focus",
+          "4",
+          "Good overall but export could be clearer.",
+          "2026-09-05T08:42:00Z",
+          "2.3.2",
+          "CA",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-001",
+          "com.sciencia.notes",
+          "1",
+          "Login loop prevented me from opening my notes.",
+          "2026-09-02T11:05:00Z",
+          "1.8.0",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-002",
+          "com.sciencia.notes",
+          "5",
+          "Simple interface and reliable sync.",
+          "2026-09-04T09:10:00Z",
+          "1.8.0",
+          "GB",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-003",
+          "com.sciencia.notes",
+          "3",
+          "Works, but notifications are inconsistent.",
+          "2026-09-06T16:30:00Z",
+          "1.8.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-001",
+          "com.sciencia.travel",
+          "4",
+          "Trip planner is helpful and the map is clean.",
+          "2026-09-01T07:25:00Z",
+          "4.1.0",
+          "AU",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-002",
+          "com.sciencia.travel",
+          "2",
+          "The app lost my saved itinerary after an update.",
+          "2026-09-05T18:12:00Z",
+          "4.1.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-003",
+          "com.sciencia.travel",
+          "5",
+          "Very useful for keeping reservations together.",
+          "2026-09-07T12:44:00Z",
+          "4.1.1",
+          "SG",
+          "2026-10-17 20:52:05"
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "CSV download and content type",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "CSV comma text survives parser",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Database export application tables",
+      "expected": [
+        "apps",
+        "ingestion_runs",
+        "reviews"
+      ],
+      "actual": [
+        "apps",
+        "ingestion_runs",
+        "reviews"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table contents: apps",
+      "expected": [
+        [
+          "com.sciencia.focus",
+          "Focus AI"
+        ],
+        [
+          "com.sciencia.notes",
+          "Smart Notes"
+        ],
+        [
+          "com.sciencia.travel",
+          "Travel Companion"
+        ]
+      ],
+      "actual": [
+        [
+          "com.sciencia.focus",
+          "Focus AI"
+        ],
+        [
+          "com.sciencia.notes",
+          "Smart Notes"
+        ],
+        [
+          "com.sciencia.travel",
+          "Travel Companion"
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table definition: apps",
+      "expected": "CREATE TABLE apps (\n                app_id TEXT PRIMARY KEY,\n                display_name TEXT NOT NULL\n            )",
+      "actual": "CREATE TABLE apps (\n                app_id TEXT PRIMARY KEY,\n                display_name TEXT NOT NULL\n            )",
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table contents: ingestion_runs",
+      "expected": [
+        [
+          1,
+          "com.sciencia.focus",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          2,
+          "com.sciencia.notes",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          3,
+          "com.sciencia.travel",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          4,
+          "com.sciencia.focus",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          5,
+          "com.sciencia.notes",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          6,
+          "com.sciencia.travel",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ]
+      ],
+      "actual": [
+        [
+          1,
+          "com.sciencia.focus",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          2,
+          "com.sciencia.notes",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          3,
+          "com.sciencia.travel",
+          "2026-10-17 20:52:05",
+          3,
+          3,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          4,
+          "com.sciencia.focus",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          5,
+          "com.sciencia.notes",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ],
+        [
+          6,
+          "com.sciencia.travel",
+          "2026-10-17 20:52:05",
+          3,
+          0,
+          "SUCCESS",
+          "mock provider ingestion completed"
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table definition: ingestion_runs",
+      "expected": "CREATE TABLE ingestion_runs (\n                run_id INTEGER PRIMARY KEY AUTOINCREMENT,\n                app_id TEXT NOT NULL,\n                started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                fetched_count INTEGER NOT NULL,\n                inserted_count INTEGER NOT NULL,\n                status TEXT NOT NULL,\n                message TEXT,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "actual": "CREATE TABLE ingestion_runs (\n                run_id INTEGER PRIMARY KEY AUTOINCREMENT,\n                app_id TEXT NOT NULL,\n                started_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                fetched_count INTEGER NOT NULL,\n                inserted_count INTEGER NOT NULL,\n                status TEXT NOT NULL,\n                message TEXT,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table contents: reviews",
+      "expected": [
+        [
+          "focus-001",
+          "com.sciencia.focus",
+          5,
+          "Fast and easy to use. The summaries are useful.",
+          "2026-09-01T10:15:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-002",
+          "com.sciencia.focus",
+          2,
+          "Search is slow after the latest update.",
+          "2026-09-03T14:20:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-003",
+          "com.sciencia.focus",
+          4,
+          "Good overall but export could be clearer.",
+          "2026-09-05T08:42:00Z",
+          "2.3.2",
+          "CA",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-001",
+          "com.sciencia.notes",
+          1,
+          "Login loop prevented me from opening my notes.",
+          "2026-09-02T11:05:00Z",
+          "1.8.0",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-002",
+          "com.sciencia.notes",
+          5,
+          "Simple interface and reliable sync.",
+          "2026-09-04T09:10:00Z",
+          "1.8.0",
+          "GB",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-003",
+          "com.sciencia.notes",
+          3,
+          "Works, but notifications are inconsistent.",
+          "2026-09-06T16:30:00Z",
+          "1.8.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-001",
+          "com.sciencia.travel",
+          4,
+          "Trip planner is helpful and the map is clean.",
+          "2026-09-01T07:25:00Z",
+          "4.1.0",
+          "AU",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-002",
+          "com.sciencia.travel",
+          2,
+          "The app lost my saved itinerary after an update.",
+          "2026-09-05T18:12:00Z",
+          "4.1.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-003",
+          "com.sciencia.travel",
+          5,
+          "Very useful for keeping reservations together.",
+          "2026-09-07T12:44:00Z",
+          "4.1.1",
+          "SG",
+          "2026-10-17 20:52:05"
+        ]
+      ],
+      "actual": [
+        [
+          "focus-001",
+          "com.sciencia.focus",
+          5,
+          "Fast and easy to use. The summaries are useful.",
+          "2026-09-01T10:15:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-002",
+          "com.sciencia.focus",
+          2,
+          "Search is slow after the latest update.",
+          "2026-09-03T14:20:00Z",
+          "2.3.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "focus-003",
+          "com.sciencia.focus",
+          4,
+          "Good overall but export could be clearer.",
+          "2026-09-05T08:42:00Z",
+          "2.3.2",
+          "CA",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-001",
+          "com.sciencia.notes",
+          1,
+          "Login loop prevented me from opening my notes.",
+          "2026-09-02T11:05:00Z",
+          "1.8.0",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-002",
+          "com.sciencia.notes",
+          5,
+          "Simple interface and reliable sync.",
+          "2026-09-04T09:10:00Z",
+          "1.8.0",
+          "GB",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "notes-003",
+          "com.sciencia.notes",
+          3,
+          "Works, but notifications are inconsistent.",
+          "2026-09-06T16:30:00Z",
+          "1.8.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-001",
+          "com.sciencia.travel",
+          4,
+          "Trip planner is helpful and the map is clean.",
+          "2026-09-01T07:25:00Z",
+          "4.1.0",
+          "AU",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-002",
+          "com.sciencia.travel",
+          2,
+          "The app lost my saved itinerary after an update.",
+          "2026-09-05T18:12:00Z",
+          "4.1.1",
+          "US",
+          "2026-10-17 20:52:05"
+        ],
+        [
+          "travel-003",
+          "com.sciencia.travel",
+          5,
+          "Very useful for keeping reservations together.",
+          "2026-09-07T12:44:00Z",
+          "4.1.1",
+          "SG",
+          "2026-10-17 20:52:05"
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "check": "Exported table definition: reviews",
+      "expected": "CREATE TABLE reviews (\n                review_id TEXT PRIMARY KEY,\n                app_id TEXT NOT NULL,\n                rating INTEGER NOT NULL,\n                text TEXT NOT NULL,\n                created_at TEXT NOT NULL,\n                app_version TEXT,\n                user_region TEXT,\n                ingested_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "actual": "CREATE TABLE reviews (\n                review_id TEXT PRIMARY KEY,\n                app_id TEXT NOT NULL,\n                rating INTEGER NOT NULL,\n                text TEXT NOT NULL,\n                created_at TEXT NOT NULL,\n                app_version TEXT,\n                user_region TEXT,\n                ingested_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                FOREIGN KEY (app_id) REFERENCES apps(app_id)\n            )",
+      "status": "PASS"
+    },
+    {
+      "check": "Exported database integrity",
+      "expected": "ok",
+      "actual": "ok",
+      "status": "PASS"
+    },
+    {
+      "check": "Database attachment filename",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Health status and UTC timestamp",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Existing test_health function (direct runner)",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "check": "Log has application query parameters",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Log has POST path but does not log form app_id",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Log includes development server startup and HTTP access",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Demo token appears in private raw query logs",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "Only owned server stopped",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "check": "All original non-doc files remain byte-identical",
+      "expected": {
+        ".DS_Store": "070817e04307ad321c96a61bb5ac8a66e1ea9303e6182cffd082cb132577238f",
+        ".gitignore": "5ff138f39bff0810331750a99ba68cecb8c0c67d3f3d55bf66a1e17879b5c6f5",
+        "README.md": "82884642a5db4b9eeead95d03b506c36e390b95897c2c85a6a17a573e22a7e60",
+        "SECURITY_SCOPE.md": "3c6e169df0f88e2dad2c9d679fa9640b69e757b41a5097ba76ee01ee3434e304",
+        "STUDENT_START_HERE.md": "ea628ef6882e66c0a0c21af8b9b009765fc8caf94229f928866bac032c5d8b6a",
+        "app/.DS_Store": "b8d914e5d80f7419d8123e315055b110a26b9a39c3bcff9f768bb15d2bc3a29a",
+        "app/app.py": "bd077abbdb14f84e00339999f9c28e69a9618048c444f37f9aaf8e12c6f9debf",
+        "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+        "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+        "app/security-notes.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+        "app/templates/index.html": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+        "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+        "data/reviews.db": "c28c72ca7e305ee6dd97c9586aaf11ad8451fcfd8846fd4ed0b3c7fa4074f16c",
+        "logs/app.log": "e70febf382761acb5edb2bc2d5e4e749b2bdf9df92a28785eda561086fd71946",
+        "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+        "tests/test_smoke.py": "3c37a9ca8fd7aec010dd6bea9d657ae8c9e4ee11e179f03d07ed010cf136940e"
+      },
+      "actual": {
+        ".DS_Store": "070817e04307ad321c96a61bb5ac8a66e1ea9303e6182cffd082cb132577238f",
+        ".gitignore": "5ff138f39bff0810331750a99ba68cecb8c0c67d3f3d55bf66a1e17879b5c6f5",
+        "README.md": "82884642a5db4b9eeead95d03b506c36e390b95897c2c85a6a17a573e22a7e60",
+        "SECURITY_SCOPE.md": "3c6e169df0f88e2dad2c9d679fa9640b69e757b41a5097ba76ee01ee3434e304",
+        "STUDENT_START_HERE.md": "ea628ef6882e66c0a0c21af8b9b009765fc8caf94229f928866bac032c5d8b6a",
+        "app/.DS_Store": "b8d914e5d80f7419d8123e315055b110a26b9a39c3bcff9f768bb15d2bc3a29a",
+        "app/app.py": "bd077abbdb14f84e00339999f9c28e69a9618048c444f37f9aaf8e12c6f9debf",
+        "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+        "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+        "app/security-notes.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+        "app/templates/index.html": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+        "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+        "data/reviews.db": "c28c72ca7e305ee6dd97c9586aaf11ad8451fcfd8846fd4ed0b3c7fa4074f16c",
+        "logs/app.log": "e70febf382761acb5edb2bc2d5e4e749b2bdf9df92a28785eda561086fd71946",
+        "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+        "tests/test_smoke.py": "3c37a9ca8fd7aec010dd6bea9d657ae8c9e4ee11e179f03d07ed010cf136940e"
+      },
+      "status": "PASS"
+    }
+  ],
+  "totals": {
+    "PASS": 66,
+    "FAIL": 0
+  },
+  "public_sanitization": {
+    "version": 1,
+    "description": "Environment identifiers are normalized recursively in keys and values. Results, states, versions, and verification-time hashes are preserved.",
+    "placeholders": {
+      "<PROJECT_ROOT>": "source project directory",
+      "<TEMP_RUNTIME>": "isolated runtime directory",
+      "<PYTHON_EXECUTABLE>": "Python interpreter used for verification",
+      "<LOCAL_PORT>": "local server port",
+      "<LOCAL_PATH_N>": "other distinct local absolute paths"
+    }
+  }
+}

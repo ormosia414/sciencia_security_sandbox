@@ -1,0 +1,54 @@
+2026-10-17 18:05:51,532 INFO WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:<LOCAL_PORT>
+2026-10-17 18:05:51,532 INFO Press CTRL+C to quit
+2026-10-17 18:05:51,558 INFO request path=/health args={}
+2026-10-17 18:05:51,558 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /health HTTP/1.1" 200 -
+2026-10-17 18:05:51,561 INFO request path=/ args={}
+2026-10-17 18:05:51,564 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET / HTTP/1.1" 200 -
+2026-10-17 18:05:51,565 INFO request path=/static/style.css args={}
+2026-10-17 18:05:51,569 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /static/style.css HTTP/1.1" 200 -
+2026-10-17 18:05:51,570 INFO request path=/ingest args={}
+2026-10-17 18:05:51,572 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,574 INFO request path=/ingest args={}
+2026-10-17 18:05:51,575 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,576 INFO request path=/ingest args={}
+2026-10-17 18:05:51,577 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,578 INFO request path=/ingest args={}
+2026-10-17 18:05:51,579 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,580 INFO request path=/ingest args={}
+2026-10-17 18:05:51,581 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,582 INFO request path=/ingest args={}
+2026-10-17 18:05:51,582 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "POST /ingest HTTP/1.1" 200 -
+2026-10-17 18:05:51,584 INFO request path=/ args={}
+2026-10-17 18:05:51,584 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET / HTTP/1.1" 200 -
+2026-10-17 18:05:51,585 INFO request path=/reviews args={}
+2026-10-17 18:05:51,586 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews HTTP/1.1" 200 -
+2026-10-17 18:05:51,587 INFO request path=/reviews args={'app_id': 'com.sciencia.focus'}
+2026-10-17 18:05:51,587 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?app_id=com.sciencia.focus HTTP/1.1" 200 -
+2026-10-17 18:05:51,589 INFO request path=/reviews args={'app_id': 'com.sciencia.notes'}
+2026-10-17 18:05:51,589 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?app_id=com.sciencia.notes HTTP/1.1" 200 -
+2026-10-17 18:05:51,590 INFO request path=/reviews args={'app_id': 'com.sciencia.travel'}
+2026-10-17 18:05:51,590 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?app_id=com.sciencia.travel HTTP/1.1" 200 -
+2026-10-17 18:05:51,591 INFO request path=/reviews args={'q': 'useful'}
+2026-10-17 18:05:51,592 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?q=useful HTTP/1.1" 200 -
+2026-10-17 18:05:51,592 INFO request path=/reviews args={'app_id': 'com.sciencia.focus', 'q': 'useful'}
+2026-10-17 18:05:51,593 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?app_id=com.sciencia.focus&q=useful HTTP/1.1" 200 -
+2026-10-17 18:05:51,594 INFO request path=/reviews args={'q': 'unfindableword'}
+2026-10-17 18:05:51,594 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /reviews?q=unfindableword HTTP/1.1" 200 -
+2026-10-17 18:05:51,595 INFO request path=/analysis/summary args={'app_id': 'com.sciencia.focus'}
+2026-10-17 18:05:51,595 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /analysis/summary?app_id=com.sciencia.focus HTTP/1.1" 200 -
+2026-10-17 18:05:51,596 INFO request path=/analysis/summary args={'app_id': 'com.sciencia.notes'}
+2026-10-17 18:05:51,596 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /analysis/summary?app_id=com.sciencia.notes HTTP/1.1" 200 -
+2026-10-17 18:05:51,597 INFO request path=/analysis/summary args={'app_id': 'com.sciencia.travel'}
+2026-10-17 18:05:51,597 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /analysis/summary?app_id=com.sciencia.travel HTTP/1.1" 200 -
+2026-10-17 18:05:51,598 INFO request path=/analysis/summary args={}
+2026-10-17 18:05:51,598 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /analysis/summary HTTP/1.1" 200 -
+2026-10-17 18:05:51,599 INFO request path=/admin/runs args={}
+2026-10-17 18:05:51,600 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /admin/runs HTTP/1.1" 200 -
+2026-10-17 18:05:51,601 INFO request path=/export.csv args={}
+2026-10-17 18:05:51,601 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /export.csv HTTP/1.1" 200 -
+2026-10-17 18:05:51,603 INFO request path=/export.db args={'token': '[REDACTED]'}
+2026-10-17 18:05:51,603 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /export.db?token=[REDACTED] HTTP/1.1" 200 -
+2026-10-17 18:05:51,605 INFO request path=/health args={}
+2026-10-17 18:05:51,606 INFO 127.0.0.1 - - [17/Oct/2026 18:05:51] "GET /health HTTP/1.1" 200 -
+2026-10-17 18:05:51,726 INFO request path=/health args={}
