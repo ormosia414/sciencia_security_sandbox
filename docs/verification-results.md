@@ -51,9 +51,9 @@ is secure.
 ## 2. Environment, isolation, and reproduction
 
 The recorded environment used Python 3.9.6 on macOS 26.6.2 arm64, SQLite 3.51.0,
-Flask 3.0.3, Werkzeug 3.1.9, and Jinja2 3.1.6. Additional package versions and exact
-normalized launch commands are in the JSON records. Existing dependencies were used; none
-were installed for verification.
+Flask 3.0.3, Werkzeug 3.1.9, and Jinja2 3.1.6. Additional package versions and
+normalized launch commands are in the JSON records. Existing dependencies were
+used; none were installed for verification.
 
 The script copied the application, tests, requirements, and provider JSON to a
 separate temporary runtime directory. It did not copy the source database or log.
@@ -183,7 +183,13 @@ recorded runtime snapshots. The verifier was subsequently updated for public
 output sanitization and checked offline; the retained script hashes describe
 the earlier functional runs, not a new execution of the updated script.
 
-- The application smoke test available for those runs, `test_health`, was called directly in a separate process
+The historical manifests also list `app/security-notes.md` as a zero-byte file.
+It is absent from the current tracked delivery and supplies no analysis or runtime
+behavior. The manifests remain snapshots of those runs, not a current file index;
+their entries and results have not been changed to match today's file list.
+
+- The application smoke test available for those runs, `test_health`, was called
+  directly in a separate process
   against the temporary project. Pytest was not installed; its collection and
   plugins were not run. This is a verification limitation, not an application
   vulnerability.

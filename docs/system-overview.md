@@ -131,6 +131,15 @@ existing evidence redacts the token and other configured secret values.
 | Stored data → export recipient | CSV has no authorization check; database export checks one demo token. The design assumes eligible local callers and acceptable whole-file disclosure. If those assumptions fail, data can reach unintended recipients or persist in uncontrolled copies. |
 | Request parameters → logs | Enabled logging records query values without redaction in the application. It assumes raw logs remain restricted. A value used to authorize export can consequently become available through a different access path. |
 
+Existing controls address different problems. Bound parameters in `ingest()`
+and the app-specific `summary()` query keep supplied values separate from SQL
+structure; they do not grant permission to the caller, and do not protect the
+separately constructed search query. `connect()` enables foreign keys so review
+and history rows must reference an application. This protects relationships,
+not rating ranges, date formats, or user permissions. The import transaction
+commits its writes together or rolls them back on an exception; it does not
+provide a separate record of a failed attempt.
+
 Local deployment reduces network exposure but does not make every local caller,
 file writer, or log reader trusted. These are changes in data or authority,
 not separate security boundaries for every internal function call.
