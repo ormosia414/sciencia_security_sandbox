@@ -39,8 +39,9 @@ unchanged** and **Original log presence unchanged**. Each recorded `false` befor
 and after execution: the clean source copy had no runtime database or log, and
 neither was created there. **Existing runtime database inspection** was N/A
 (`NOT_APPLICABLE`) because there was no existing database to inspect. It is not
-counted as PASS. No historical check was removed, and the historical evidence
-remains unchanged.
+counted as PASS. No historical check was removed. Public copies of both records
+normalize environment identifiers as described in Section 4; the recorded results
+and verification-time hashes are retained.
 
 Totals include functional checks, preservation checks, and observations. PASS
 means the stated expectation matched the observation; it is not a security
@@ -51,7 +52,7 @@ is secure.
 
 The recorded environment used Python 3.9.6 on macOS 26.6.2 arm64, SQLite 3.51.0,
 Flask 3.0.3, Werkzeug 3.1.9, and Jinja2 3.1.6. Additional package versions and exact
-launch commands are in the JSON records. Existing dependencies were used; none
+normalized launch commands are in the JSON records. Existing dependencies were used; none
 were installed for verification.
 
 The script copied the application, tests, requirements, and provider JSON to a
@@ -138,11 +139,38 @@ that this observation was confirmed. It does not mean a confidentiality or
 security requirement was satisfied. The latest evidence explicitly labels this
 as an observation and explains its interpretation.
 
-Shared evidence masks configured secret/token values and removes Debugger PIN
-lines if present. Original raw logs, runtime databases, and temporary downloads
-are not part of the submitted evidence. Machine-readable records retain local
-environment paths, so they should be handled as private project material rather
-than anonymous data.
+Public evidence masks configured secret/token values and removes Debugger PIN
+lines if present. Environment identifiers are normalized recursively in JSON
+keys and values and in published logs: `<PROJECT_ROOT>` identifies the source
+directory, `<TEMP_RUNTIME>` the isolated runtime, `<PYTHON_EXECUTABLE>` the
+interpreter, and `<LOCAL_PORT>` the temporary server port. Other local paths use
+distinct numbered aliases. Nested commands, errors, and expected/actual objects
+use the same mapping. Commands containing placeholders document a run; they are
+not literal commands to execute without replacing the placeholders.
+
+This is a presentation-only cleanup, not a new functional run. Check names,
+statuses, expected/actual comparison relationships, counts, statistics, dependency
+versions, and verification-time source hashes are preserved. The records include
+`public_sanitization` metadata to distinguish these public copies from raw local
+materials. Source hashes identify the original verified files, not the bytes of
+the subsequently sanitized JSON or the updated sanitizer.
+
+Only unpublished raw material is private: pre-normalization copies are retained
+under the ignored `.private-verification/` directory. That directory is excluded
+from future verifier inventories. Original raw runtime logs, databases, and
+downloads also remain outside the published evidence. The JSON and redacted-log
+attachments linked in this report are the sanitized public versions.
+
+The output sanitizer is covered by offline checks for nested keys and values,
+command arguments, error text, distinct path aliases, identity/secret masking,
+port normalization, and unchanged counts, versions, hashes, and statuses. It
+rejects key collisions or normalization that would change expected/actual equality.
+These checks do not import the application, start a server, or rerun the functional
+scenarios. They can be run separately with:
+
+```sh
+.venv/bin/python -B -m unittest discover -s tests -p test_public_evidence.py
+```
 
 ## 5. Coverage and limitations
 
@@ -151,10 +179,11 @@ and CSS, `data/provider_reviews.json`, `requirements.txt`, and
 `tests/test_smoke.py`, alongside the task/scope documents and project reports.
 Evidence manifests and hashes identify file snapshots; file access or hashing
 alone is not a technical review. The executable source and fixture match the
-recorded runtime snapshots, and the current verifier matches the latest executed
-script. Later report edits do not alter the runtime evidence.
+recorded runtime snapshots. The verifier was subsequently updated for public
+output sanitization and checked offline; the retained script hashes describe
+the earlier functional runs, not a new execution of the updated script.
 
-- The only existing test, `test_health`, was called directly in a separate process
+- The application smoke test available for those runs, `test_health`, was called directly in a separate process
   against the temporary project. Pytest was not installed; its collection and
   plugins were not run. This is a verification limitation, not an application
   vulnerability.

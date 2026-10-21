@@ -4,3 +4,6 @@ __pycache__/
 data/reviews.db
 logs/*.log
 .DS_Store
+
+# Raw local verification material; never publish.
+.private-verification/

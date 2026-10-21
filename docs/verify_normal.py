@@ -30,6 +30,114 @@ from urllib.request import build_opener, ProxyHandler, Request
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "evidence"
 EXCLUDE = {".git", ".venv", "__pycache__", ".pytest_cache", "node_modules"}
+EXCLUDE.add(".private-verification")
+PUBLIC_SANITIZATION = {
+    "version": 1,
+    "description": "Environment identifiers are normalized recursively in keys and values. Results, states, versions, and verification-time hashes are preserved.",
+    "placeholders": {"<PROJECT_ROOT>": "source project directory",
+                     "<TEMP_RUNTIME>": "isolated runtime directory",
+                     "<PYTHON_EXECUTABLE>": "Python interpreter used for verification",
+                     "<LOCAL_PORT>": "local server port",
+                     "<LOCAL_PATH_N>": "other distinct local absolute paths"}}
+
+
+class PublicEvidenceSanitizer:
+    """Normalize only published values; never use these aliases for file I/O.
+
+    Keys and values share one mapping, including expected/actual objects.
+    Distinct unknown paths keep distinct aliases so comparisons do not collapse.
+    """
+
+    HTTP_PATHS = {"/", "/ingest", "/reviews", "/analysis/summary", "/admin/runs",
+                  "/export.csv", "/export.db", "/health", "/static/style.css"}
+    PATH_PATTERN = re.compile(
+        r"(?<![\w<>:/])(?:[A-Za-z]:[\\/][^\s\"'<>()[\]{},;]+|"
+        r"/(?:[^\s\"'<>()[\]{},;:]+/)+[^\s\"'<>()[\]{},;:]*)")
+
+    def __init__(self, *, project_root, runtime_copy=None, python_executable=None,
+                 local_port=None, sensitive_values=(), usernames=(), hostnames=()):
+        self.bindings = {}
+        self.paths = {}
+        self.ports = {}
+        self.usernames = set(usernames)
+        self.hostnames = set(hostnames)
+        self.secrets = {value: "[REDACTED_SECRET_{}]".format(i + 1)
+                        for i, value in enumerate(dict.fromkeys(sensitive_values)) if value}
+        for value, label in [(python_executable, "<PYTHON_EXECUTABLE>"),
+                             (runtime_copy, "<TEMP_RUNTIME>"),
+                             (project_root, "<PROJECT_ROOT>")]:
+            if not value or str(value).startswith("<"):
+                continue
+            value = str(value).rstrip("/\\")
+            variants = {value, value.replace("\\", "/")}
+            for prefix in ("/var/", "/tmp/"):
+                if value.startswith(prefix):
+                    variants.add("/private" + value)
+                if value.startswith("/private" + prefix):
+                    variants.add(value[len("/private"):])
+            for variant in variants:
+                self.bindings.setdefault(variant, label)
+            self.usernames.update(re.findall(r"(?:/Users/|/home/|[\\/]Users[\\/])([^/\\]+)", value))
+        if local_port is not None:
+            self.ports[str(local_port)] = "<LOCAL_PORT>"
+
+    def _path(self, match):
+        value = match.group(0)
+        if value.split("?", 1)[0] in self.HTTP_PATHS or value.startswith("/static/"):
+            return value
+        if value not in self.paths:
+            self.paths[value] = "<LOCAL_PATH_{}>".format(len(self.paths) + 1)
+        return self.paths[value]
+
+    def _port(self, value):
+        value = str(value)
+        if value not in self.ports:
+            suffix = "" if not self.ports else "_{}".format(len(self.ports) + 1)
+            self.ports[value] = "<LOCAL_PORT{}>".format(suffix)
+        return self.ports[value]
+
+    def _text(self, value):
+        for secret, alias in sorted(self.secrets.items(), key=lambda item: -len(item[0])):
+            value = value.replace(secret, alias)
+        value = re.sub(r"(?im)^.*Debugger.*PIN.*$", "[Debugger PIN hidden]", value)
+        value = re.sub(r"\x1b\[[0-9;]*m", "", value)
+        for path, alias in sorted(self.bindings.items(), key=lambda item: -len(item[0])):
+            # Do not mistake a similarly named sibling directory for this root.
+            value = re.sub(re.escape(path) + r"(?![\w.-])", lambda match: alias, value)
+        value = self.PATH_PATTERN.sub(self._path, value)
+        value = re.sub(r"(?i)\b(?:127\.0\.0\.1|localhost):(\d{1,5})\b",
+                       lambda m: m.group(0)[:m.group(0).rfind(":") + 1] + self._port(m[1]), value)
+        value = re.sub(r"(?i)\b(port[=: ]+)(\d{2,5})\b",
+                       lambda m: m[1] + self._port(m[2]), value)
+        if value in self.ports:  # Port passed as a command-line argument.
+            value = self.ports[value]
+        for identity, alias in [(x, "<LOCAL_USER>") for x in self.usernames if x] + [
+                (x, "<LOCAL_HOST>") for x in self.hostnames if x]:
+            value = re.sub(r"(?<![\w])" + re.escape(identity) + r"(?![\w])",
+                           lambda match: alias, value)
+        value = re.sub(r"\b[\w-]+\.(?:local|lan)\b", "<LOCAL_HOST>", value)
+        return value
+
+    def sanitize(self, value, key=None):
+        if isinstance(value, dict):
+            result = {}
+            for name, child in value.items():
+                clean_name = self._text(name) if isinstance(name, str) else name
+                if clean_name in result:
+                    raise ValueError("Sanitization would merge distinct dictionary keys")
+                result[clean_name] = self.sanitize(child, name)
+            if {"expected", "actual"}.issubset(value) and (
+                    (value["expected"] == value["actual"]) !=
+                    (result["expected"] == result["actual"])):
+                raise ValueError("Sanitization would change expected/actual equality")
+            return result
+        if isinstance(value, (list, tuple)):
+            return [self.sanitize(child) for child in value]
+        if isinstance(value, str):
+            return self._text(value)
+        if key in {"port", "local_port", "server_port"} and type(value) is int:
+            return self._port(value)
+        return value
 
 
 def digest(path):
@@ -337,14 +445,12 @@ def run():
              if p.relative_to(ROOT).parts[0] != "docs"}
     check("All original non-doc files remain byte-identical", original, after)
 
-    def redact(value):
-        for key in ("APP_SECRET", "INTERNAL_EXPORT_TOKEN"):
-            value = value.replace(config[key], "[REDACTED]")
-        value = re.sub(r"(?im)^.*Debugger.*PIN.*$", "[Debugger PIN hidden]", value)
-        value = re.sub(r"\x1b\[[0-9;]*m", "", value)
-        return value
-
-    redacted_log = redact(raw_log)
+    hostname = platform.node()
+    sanitizer = PublicEvidenceSanitizer(
+        project_root=ROOT, runtime_copy=temp, python_executable=sys.executable,
+        local_port=port, sensitive_values=[config["APP_SECRET"], config["INTERNAL_EXPORT_TOKEN"]],
+        usernames=[Path.home().name], hostnames=[hostname, hostname.split(".")[0]])
+    redacted_log = sanitizer.sanitize(raw_log)
     assert all(config[k] not in redacted_log for k in ("APP_SECRET", "INTERNAL_EXPORT_TOKEN"))
     (evidence_dir / "runtime-log.redacted.txt").write_text(redacted_log)
     result = {"run_id": run_id, "verification_date": started_at.date().isoformat(),
@@ -366,14 +472,15 @@ def run():
                       "per_app": {k: sum(r[1] == k for r in parsed[1:]) for k in provider}},
               "requests": responses, "existing_test": test_result, "checks": checks,
               "totals": {s: sum(c["status"] == s for c in checks) for s in ["PASS", "FAIL", "NOT_APPLICABLE"]}}
-    serialized = redact(json.dumps(result, indent=2, ensure_ascii=False))
+    result["public_sanitization"] = PUBLIC_SANITIZATION
+    serialized = json.dumps(sanitizer.sanitize(result), indent=2, ensure_ascii=False)
     # Do not publish even an accidental unredacted secret.
     assert all(config[k] not in serialized for k in ("APP_SECRET", "INTERNAL_EXPORT_TOKEN"))
     (evidence_dir / "normal-verification.json").write_text(serialized + "\n")
-    print(json.dumps({"run_id": run_id, "evidence_directory": str(evidence_dir),
+    print(json.dumps(sanitizer.sanitize({"run_id": run_id, "evidence_directory": str(evidence_dir),
                       "verification_date": result["verification_date"], "verification_timezone": "UTC",
                       "runtime_copy": str(temp), "base_url": base, "totals": result["totals"],
-                      "failures": [c["check"] for c in checks if c["status"] == "FAIL"]}))
+                      "failures": [c["check"] for c in checks if c["status"] == "FAIL"]})))
     if result["totals"]["FAIL"]:
         raise SystemExit(1)
 
