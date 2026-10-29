@@ -1,0 +1,4 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+<LOCAL_PATH_1>:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

@@ -1,0 +1,45 @@
+2026-10-27 08:45:12,732 INFO WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:<LOCAL_PORT>
+2026-10-27 08:45:12,732 INFO Press CTRL+C to quit
+2026-10-27 08:45:12,750 INFO request path=/health args={}
+2026-10-27 08:45:12,750 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /health HTTP/1.1" 200 -
+2026-10-27 08:45:12,755 INFO request path=/ args={}
+2026-10-27 08:45:12,758 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET / HTTP/1.1" 200 -
+2026-10-27 08:45:12,759 INFO request path=/ingest args={}
+2026-10-27 08:45:12,763 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "POST /ingest HTTP/1.1" 200 -
+2026-10-27 08:45:12,766 INFO request path=/admin/runs args={}
+2026-10-27 08:45:12,766 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /admin/runs HTTP/1.1" 200 -
+2026-10-27 08:45:12,768 INFO request path=/export.csv args={}
+2026-10-27 08:45:12,768 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.csv HTTP/1.1" 200 -
+2026-10-27 08:45:12,770 INFO request path=/ingest args={}
+2026-10-27 08:45:12,772 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "POST /ingest HTTP/1.1" 200 -
+2026-10-27 08:45:12,774 INFO request path=/admin/runs args={}
+2026-10-27 08:45:12,775 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /admin/runs HTTP/1.1" 200 -
+2026-10-27 08:45:12,777 INFO request path=/export.csv args={}
+2026-10-27 08:45:12,777 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.csv HTTP/1.1" 200 -
+2026-10-27 08:45:12,779 INFO request path=/ingest args={}
+2026-10-27 08:45:12,781 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "POST /ingest HTTP/1.1" 200 -
+2026-10-27 08:45:12,784 INFO request path=/reviews args={}
+2026-10-27 08:45:12,785 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews HTTP/1.1" 200 -
+2026-10-27 08:45:12,789 INFO request path=/reviews args={'app_id': 'com.sciencia.focus'}
+2026-10-27 08:45:12,790 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?app_id=com.sciencia.focus HTTP/1.1" 200 -
+2026-10-27 08:45:12,791 INFO request path=/reviews args={'app_id': 'com.sciencia.missing'}
+2026-10-27 08:45:12,792 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?app_id=com.sciencia.missing HTTP/1.1" 200 -
+2026-10-27 08:45:12,793 INFO request path=/reviews args={'q': 'useful'}
+2026-10-27 08:45:12,793 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?q=useful HTTP/1.1" 200 -
+2026-10-27 08:45:12,795 INFO request path=/reviews args={'q': 'unfindableword'}
+2026-10-27 08:45:12,795 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?q=unfindableword HTTP/1.1" 200 -
+2026-10-27 08:45:12,796 INFO request path=/reviews args={'app_id': 'com.sciencia.focus', 'q': 'unfindableword'}
+2026-10-27 08:45:12,797 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?app_id=com.sciencia.focus&q=unfindableword HTTP/1.1" 200 -
+2026-10-27 08:45:12,798 INFO request path=/reviews args={'app_id': "com.sciencia.missing' OR '1'='1"}
+2026-10-27 08:45:12,799 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?app_id=com.sciencia.missing'+OR+'1'%3D'1 HTTP/1.1" 200 -
+2026-10-27 08:45:12,800 INFO request path=/reviews args={'app_id': 'com.sciencia.focus', 'q': "unfindableword%' OR 1=1 -- "}
+2026-10-27 08:45:12,800 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /reviews?app_id=com.sciencia.focus&q=unfindableword%25'+OR+1%3D1+--+ HTTP/1.1" 200 -
+2026-10-27 08:45:12,802 INFO request path=/export.db args={}
+2026-10-27 08:45:12,802 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.db HTTP/1.1" 403 -
+2026-10-27 08:45:12,803 INFO request path=/export.db args={'token': 'incorrect-demo-value'}
+2026-10-27 08:45:12,803 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.db?token=incorrect-demo-value HTTP/1.1" 403 -
+2026-10-27 08:45:12,804 INFO request path=/export.db args={'token': '<EXPORT_TOKEN>'}
+2026-10-27 08:45:12,808 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.db?token=<EXPORT_TOKEN> HTTP/1.1" 200 -
+2026-10-27 08:45:12,810 INFO request path=/export.db args={'token': '<EXPORT_TOKEN>'}
+2026-10-27 08:45:12,810 INFO 127.0.0.1 - - [27/Oct/2026 08:45:12] "GET /export.db?token=<EXPORT_TOKEN> HTTP/1.1" 200 -
