@@ -27,11 +27,15 @@ start/completion times, command, exit status, method/failure/error/skip counts,
 and the hash of its published `*.output.txt`. These group records also appear
 inside the summary.
 
-The baseline is `c61504d80935fba0ab60abe0330a3712518425b4`; it does not contain
-the repairs. The latest pre/post hashes of nine source, fixture, and test files
-match each other and the current reviewed files. They identify the tested working
-tree more precisely than the baseline commit alone. Earlier document inventories
-are not substitutes for this run record.
+When the tests ran, the fixes were uncommitted changes on baseline
+`c61504d80935fba0ab60abe0330a3712518425b4`. Delivery commit
+`c7a64f2fb187697131bc585714b863f4ab15b632` was created later. Each of the nine
+listed source, fixture, and test file hashes matches the run's pre/post hashes,
+the corresponding Git blob in that delivery commit, and the current checkout.
+This establishes file correspondence, not execution against a future commit.
+The run records' uncommitted-worktree declaration remains accurate for execution
+time. Earlier inventories and unrelated document/evidence bytes are not part
+of this nine-file correspondence claim.
 
 ## Evidence for the conclusions
 
@@ -92,8 +96,7 @@ The tests copy the application and synthetic data, use independent databases and
 logs, and generate test-only credentials. Server tests bind only to `127.0.0.1`;
 HTTP proxies are disabled. Cleanup stops their servers and removes temporary
 artifacts. These commands rerun assertions; they do not recreate past timestamps
-or automatically produce the original recorded outputs. No tests were rerun for
-this document organization.
+or automatically produce the original recorded outputs.
 
 ## Older material and public handling
 

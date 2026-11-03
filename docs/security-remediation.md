@@ -117,13 +117,16 @@ records. Interface checks use Flask's test client; the two server groups use the
 provided `run_local_server()` on loopback and stop their owned services. Log
 assertions inspect raw content before cleanup, not publicly sanitized copies.
 
-The tested source is an uncommitted working tree based on
-`c61504d80935fba0ab60abe0330a3712518425b4`, not the baseline commit alone.
-The latest run records hashes of nine source, fixture, and test files before
-and after execution; these match the reviewed files. Use the
+At test execution, the repairs were uncommitted changes based on
+`c61504d80935fba0ab60abe0330a3712518425b4`. They were later committed in
+`c7a64f2fb187697131bc585714b863f4ab15b632`. The latest run's pre/post hashes
+match all nine listed source, fixture, and test files in that delivery commit
+and the current checkout. This connects the tested snapshot to the committed
+repairs; the tests did not run against a commit that was created afterward.
+The comparison concerns the listed files, not every document or evidence file.
+Use the
 [evidence guide](evidence/security-remediation/README.md) to reproduce the tests
-or distinguish these results from older runs. The results here come from the
-saved run, not a new execution during this language edit.
+or distinguish these results from older runs.
 
 ## Proposed permissions — not implemented
 

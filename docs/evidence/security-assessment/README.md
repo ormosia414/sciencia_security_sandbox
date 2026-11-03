@@ -1,9 +1,13 @@
 # Assessment Evidence Guide
 
 This guide supports the [focused assessment](../../security-assessment.md).
+It describes the pre-remediation application at commit
+`0236b55eefb1a0922d1290fd6c17e5be256f5737`; source locations and line references
+below refer to that snapshot. Run its historical script only in a matching local
+copy, not as acceptance testing of the repaired application. Use the
+[current regression guide](../security-remediation/README.md) for the repairs.
 It records where to find the observations and how the scripted tests were run.
-The JSON, logs, and executed script are retained unchanged; this editorial review
-did not rerun tests.
+The JSON, logs, and executed script are retained as historical evidence.
 
 ## Run, environment, and reproduction
 

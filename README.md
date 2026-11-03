@@ -1,116 +1,159 @@
 # Sciencia AI Review Intelligence Sandbox
 
-A small, self-contained review-ingestion and analysis application used for the Cyber Security Internship project.
+A local Flask/SQLite teaching application for importing, searching, summarizing,
+and exporting synthetic app reviews. The provider is
+`data/provider_reviews.json`, a local mock with three apps and nine reviews.
+There is no live external provider API or AI model: summaries calculate review
+counts, average ratings, and word frequencies.
 
-## Module 1 reading guide
+## Current implementation
 
-Read the [system understanding and initial security analysis](docs/system-overview.md)
-first for the architecture, data flows, access points, protected information,
-trust assumptions, and investigation priorities. Then read the
-[verification results](docs/verification-results.md) for the methods, recorded
-normal behavior, evidence links, and limitations.
+System analysis and a focused local security assessment are complete. The
+implementation now binds both search inputs as SQL parameters, accepts database
+export credentials through a Bearer header, and protects the tested application,
+normal server-access, and HTTP parsing-error logging paths. The supplied local
+startup entry point installs the server log handler used by the regressions.
 
-For the later stages, see the [focused security assessment](docs/security-assessment.md)
-for pre-fix findings and [search/export remediation](docs/security-remediation.md)
-for implemented changes, regression results, evidence limitations, and the
-proposed permissions awaiting review. Earlier reports retain their historical
-meaning rather than describing the current interface.
+Viewer/Operator permissions are a proposal awaiting review, not implemented
+roles. Import, history, and CSV still have no caller-role checks; the database
+export token is a shared operation credential, not personal identity. This remains
+a local teaching app with demo configuration and development/debug settings,
+not a production-ready or comprehensively secured service.
 
-The [scope](SECURITY_SCOPE.md) and [original student brief](STUDENT_START_HERE.md)
-define the teaching task. These materials are provided for review; public
-publication is not a Module 1 deliverable requirement. Evidence uses environment
-placeholders and redacts credentials and debug identifiers. The original Module 1
-task excluded active security testing; later focused local work is documented
-separately.
+## Reading guide
 
-Supporting material includes the source in `app/`, sample data in `data/`,
-the verification script in `docs/verify_normal.py`, evidence in `docs/evidence/`,
-and tests in `tests/`. The original [overview template](docs/system_overview.md)
-is retained for context; it is not the final report and its simplified flow
-should not replace the final report's implementation-based diagrams.
+- **Understand the system:** [System overview](docs/system-overview.md).
+  This Module 1 analysis describes the pre-remediation architecture and risks;
+  its search, export, and logging descriptions are historical where later fixes
+  changed the implementation.
+- **Read the findings before fixes:** [Focused assessment](docs/security-assessment.md)
+  and its [evidence guide](docs/evidence/security-assessment/README.md).
+  These describe the 27 October 2026 assessment of the earlier code.
+- **Review the current repairs and permission decisions:**
+  [Security remediation](docs/security-remediation.md). Its
+  [evidence guide](docs/evidence/security-remediation/README.md) identifies the
+  preferred run for the committed repair snapshot, the parser patch comparison,
+  and reproduction commands.
+- **Look up earlier normal behavior:** [Verification results](docs/verification-results.md).
+  The 17 October 2026 records predate the repairs and are not current acceptance
+  tests.
 
-## What the system does
+The original [overview template](docs/system_overview.md) is retained as teaching
+material, not the final system report. The [student brief](STUDENT_START_HERE.md)
+and [scope](SECURITY_SCOPE.md) are the original task documents. They have not been
+rewritten to match later stages. These materials are provided for review; public
+publication is not an assignment requirement.
 
-The application simulates a lightweight internal data workflow:
+## Install and start
 
-1. A user selects an App and triggers an ingestion run.
-2. The backend loads review records from a local mock-provider file (`data/provider_reviews.json`); no external provider API is contacted.
-3. Review fields are inserted into SQLite; existing review IDs are skipped rather than updated.
-4. Users can search stored reviews, inspect ingestion runs, export data, and view counts, average ratings, and word frequencies. This is ordinary statistics, not AI sentiment classification.
-
-The sandbox is intentionally small so that the architecture, data flow, and security posture can be understood end to end.
-
-## Components
-
-- Flask web application
-- SQLite database
-- Local JSON mock review provider
-- Local application logs
-- Simple HTML interface
-- CSV/database export endpoints
-
-## Review materials and private local files
-
-The reports and sanitized evidence are intended for review. Configuration values
-in `app/config.py` are explicitly demo values, and provider records are synthetic.
-The sanitizer tests use invented paths and identities as fixtures, not real
-machine information.
-
-The ignored virtual environment, runtime database, raw logs, OS metadata, and
-`.private-verification/` backups are local material, not tracked deliverables.
-Downloaded databases and CSV files should also remain private local files.
-Only sanitized evidence belongs in the evidence directory for review; ignoring a
-file does not remove anything already tracked or previously published.
-
-## Setup
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\\Scripts\\activate
-pip install -r requirements.txt
-python app/app.py
-```
-
-Then open: `http://127.0.0.1:5000`
-
-The database is created automatically at `data/reviews.db`.
-
-## Database export
-
-The current `/export.db` endpoint requires an Authorization header:
+The commands below use a POSIX shell and Python 3. Reuse an existing compatible
+project environment if available; for a fresh checkout:
 
 ```sh
-curl --header 'Authorization: Bearer <EXPORT_TOKEN>' \
-  --output downloaded-reviews.db http://127.0.0.1:5000/export.db
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
 ```
 
-Replace the placeholder locally with the configured sandbox value. The Bearer
-scheme is case-insensitive; use one space followed by the nonempty token.
-Missing, incorrect, empty, or malformed credentials return 403 with the same
-generic error. A `token` URL query parameter never grants permission, even when
-combined with a missing or incorrect header. CSV export is unchanged.
+Start from the project root:
 
-Application request logs retain method, path, and status, without headers or
-query values. The supplied local server entry point (`python app/app.py`, or
-`run_local_server()` for a chosen local port) also omits query strings from
-Werkzeug access records before writing them. HTTP parser errors use only the
-standard status reason: the local handler discards raw diagnostic messages
-before inherited error logging and responses. This was checked for the single
-bad-request-syntax path in the [remediation report](docs/security-remediation.md),
-not every possible exception. Other launchers, WSGI servers, proxies, browsers,
-and clients need their own logging configuration; this project
-does not control their logs. Do not put credentials in URLs.
+```sh
+.venv/bin/python -B app/app.py
+```
 
-The earlier reports and scripts remain historical baselines. In particular,
-`docs/verify_normal.py` and `docs/evidence/security-assessment/assess_local.py`
-expect the former query-token/logging behavior; their expectations do not define
-the current interface. Do not rerun them as current regression tests or rewrite
-their evidence to match these fixes.
+Open `http://127.0.0.1:5000`. Startup creates `data/reviews.db` and writes local
+logs under `logs/`. Use this entry point, or the application's
+`run_local_server()` function, so the current access/error log handler is installed.
+A different Flask launcher does not automatically receive that handler.
 
-## Internship scope
+## Current usage
 
-This repository is a **local security sandbox**. It should be reviewed and tested only on your own local copy.
+Use the homepage buttons to import samples. The client sends an app ID; the
+backend reads that app's JSON records and stores them in SQLite. Repeated imports
+skip existing review IDs and add another history row.
 
-Please read `SECURITY_SCOPE.md` before beginning any active security testing.
+- `/reviews` reads stored reviews; optional `app_id` and `q` filters can be
+  combined. SQLite LIKE wildcards `%` and `_` retain their existing meaning.
+- `/analysis/summary` returns ordinary statistics for stored reviews.
+- `/admin/runs` returns import history. Its name does not provide an admin role.
+- `/export.csv` downloads all stored reviews, independently of earlier filters.
+- `/health` returns status and UTC time, not database-readiness verification.
 
-For the first module, focus on understanding the architecture, assets, data flow, access points, trust boundaries, and areas that may deserve deeper security review. Do not begin active exploitation or scanning until specifically instructed.
+Import, history, and CSV requests currently require no application identity
+credential. The proposed permission table does not restrict these routes yet.
+
+### Database export
+
+`/export.db` requires `Authorization: Bearer <EXPORT_TOKEN>`:
+
+```sh
+mkdir -p .private-verification
+curl --header 'Authorization: Bearer <EXPORT_TOKEN>' \
+  --output .private-verification/downloaded-reviews.db \
+  http://127.0.0.1:5000/export.db
+```
+
+Replace the placeholder locally with the configured sandbox value. Use one space
+and a nonempty token; the Bearer scheme is case-insensitive. Missing, incorrect,
+empty, or malformed credentials return the existing generic 403 response.
+The old URL `token` parameter never authorizes a download and cannot compensate
+for an invalid header. An ordinary browser link alone cannot supply this Bearer
+header. The attachment contains the whole database, including app mappings and
+import history, rather than only the CSV review extract.
+
+Application request logs retain method, path, and status without headers or query
+values. The provided server handler removes query strings from normal access
+records and replaces parser diagnostics with standard status reasons before
+logging. The recorded tests cover normal credential cases and one identified
+bad-request-syntax path, not every possible exception. Other servers, proxies,
+browsers, and clients need their own log settings. Old logs and downloaded copies
+are not erased by these code changes.
+
+## Current regression tests
+
+Use the existing environment; these checks use standard-library `unittest`,
+without requiring pytest. Search and interface checks use Flask's in-process
+client and independent temporary copies/databases:
+
+```sh
+.venv/bin/python -B -m unittest discover -s tests -p test_search.py -v
+.venv/bin/python -B -m unittest discover -s tests -p test_export.py -k ExportCredentialTests -v
+```
+
+The next two groups start an actual temporary server, bind only to `127.0.0.1`,
+check raw logs, and stop their owned process:
+
+```sh
+.venv/bin/python -B -m unittest discover -s tests -p test_export.py -k LiveExportLogTests -v
+.venv/bin/python -B -m unittest discover -s tests -p test_export.py -k HttpParseErrorLogTests -v
+```
+
+A server test skipped because local listening is restricted is **not** a verified
+pass. The [retained run and counts](docs/evidence/security-remediation/README.md)
+separate test methods from credential request combinations and identify the
+source hashes used. These commands reproduce assertions, not historical timestamps.
+
+`tests/test_public_evidence.py` contains separate offline sanitizer regressions.
+`tests/test_smoke.py` is the original health helper and can initialize runtime
+files in its checkout when called directly; it is not the current isolated
+acceptance entry point.
+
+Do not use `docs/verify_normal.py` or
+`docs/evidence/security-assessment/assess_local.py` as current acceptance tests.
+They retain the old URL-token/logging or vulnerable-query expectations. Their
+[historical scope](docs/verification-results.md) and
+[assessment version](docs/evidence/security-assessment/README.md) explain the
+matching source snapshots; old outputs should not be rewritten to fit repairs.
+
+## Scope and local material
+
+Work is limited to this local teaching sandbox and synthetic data, as described
+in [SECURITY_SCOPE.md](SECURITY_SCOPE.md). The original first module required
+system understanding before active testing. Later focused local assessment and
+repair work is documented separately; production, client, and third-party
+systems are outside this project.
+
+Reports and checked, sanitized evidence are review materials. Configuration
+values are explicitly demos, not real credentials. `.venv/`, the runtime
+`data/reviews.db`, raw `logs/*.log`, OS metadata, and `.private-verification/`
+are ignored local material. Keep downloads and other private data out of version
+control; ignore rules do not remove files already tracked or previously shared.

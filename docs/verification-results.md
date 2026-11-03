@@ -6,6 +6,12 @@ Author: Phoebe Zhang
 
 Recorded verification runs: 2026-10-17
 
+This is a historical pre-remediation record. The commands below describe the
+retained verifier and earlier interface; use them only with a matching earlier
+source copy. For current code and acceptance commands, see the
+[remediation report](security-remediation.md) and its
+[evidence guide](evidence/security-remediation/README.md).
+
 ## 1. Purpose and evidence
 
 This report documents how normal local behavior was checked and what the results
@@ -68,8 +74,8 @@ runtime files. Database inspection is optional when no source database exists;
 it does not create one. Existing-database read errors are not silently treated
 as absence. Source non-document file hashes were unchanged after each run.
 
-The current script can be invoked from the project root using an existing
-compatible environment:
+The retained historical verifier uses the following invocation from the root
+of a compatible pre-remediation copy:
 
 ```sh
 .venv/bin/python -B docs/verify_normal.py
@@ -178,10 +184,11 @@ The source review covered `app/app.py`, `app/db.py`, `app/config.py`, the templa
 and CSS, `data/provider_reviews.json`, `requirements.txt`, and
 `tests/test_smoke.py`, alongside the task/scope documents and project reports.
 Evidence manifests and hashes identify file snapshots; file access or hashing
-alone is not a technical review. The executable source and fixture match the
-recorded runtime snapshots. The verifier was subsequently updated for public
-output sanitization and checked offline; the retained script hashes describe
-the earlier functional runs, not a new execution of the updated script.
+alone is not a technical review. The retained manifests identify the source and
+fixture used for those runs, before the later repairs. The verifier was
+subsequently updated for public output sanitization and checked offline; the
+retained script hashes describe the earlier functional runs, not a new execution
+of the updated script.
 
 The historical manifests also list `app/security-notes.md` as a zero-byte file.
 It is absent from the current tracked delivery and supplies no analysis or runtime
