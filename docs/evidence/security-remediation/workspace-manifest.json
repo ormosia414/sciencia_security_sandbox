@@ -1,0 +1,16 @@
+{
+  "record_type": "Post-run source inventory; not a test execution record",
+  "recorded_at": "2026-11-02T19:41:21.341875+00:00",
+  "timezone": "UTC",
+  "base_commit": "c61504d80935fba0ab60abe0330a3712518425b4",
+  "workspace_id": "sha256:71e21ecd64966eb2e24f9a8265a5b63290593c08e4000a7b93651fa13b3147da",
+  "files_sha256": {
+    "app/app.py": "6a056ca50bca5d9ac890e9b13113f392020f79936d19a078fcae0e8edddc48eb",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "tests/test_search.py": "ee80e35013e5c3e352cfb7240f2b5e57d60f23fa83ca3f21d5e44da1cdd2f949",
+    "tests/test_export.py": "9d1a4f3e676ff7fc4ff7c19d8d057075d5ca58a225d195dd405442e7e18f6b44"
+  },
+  "interpretation": "The base commit is the pre-remediation baseline. The working tree includes uncommitted fixes and new tests. These hashes were collected during documentation, not captured at test execution time. Earlier terminal-session outcomes are summarized in the report; no run transcript is reconstructed here."
+}

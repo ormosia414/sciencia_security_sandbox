@@ -1,0 +1,48 @@
+{
+  "phase": "before-parser-patch",
+  "coverage": "One fixed HTTP bad-syntax path; random legacy query marker; 400 and protocol log required; raw server/app/console logs checked; owned server stopped.",
+  "record_type": "Pre-execution run record",
+  "run_id": "20261102T200332547810Z-before-parser-patch",
+  "started_at": "2026-11-02T20:03:32.565802+00:00",
+  "timezone": "UTC",
+  "baseline_commit": "c61504d80935fba0ab60abe0330a3712518425b4",
+  "includes_uncommitted_repairs": true,
+  "baseline_is_not_fixed_code": true,
+  "working_tree_status_before": [
+    "M README.md",
+    " M app/app.py",
+    "?? docs/evidence/security-remediation/",
+    "?? docs/security-remediation.md",
+    "?? tests/test_export.py",
+    "?? tests/test_search.py"
+  ],
+  "source_hashes_before": {
+    "app/app.py": "6a056ca50bca5d9ac890e9b13113f392020f79936d19a078fcae0e8edddc48eb",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+    "app/templates/index.html": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+    "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+    "tests/test_search.py": "ee80e35013e5c3e352cfb7240f2b5e57d60f23fa83ca3f21d5e44da1cdd2f949",
+    "tests/test_export.py": "ba04a056e49d367e1cb2cd384177e422d798ecfd9b6bf48ab1886c7db03878e0"
+  },
+  "test_commands": {
+    "parser-error": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_export.py",
+      "-k",
+      "HttpParseErrorLogTests",
+      "-v"
+    ]
+  },
+  "existing_document_inventory_sha256": "639bfe6f60e7e8148bea6848dc3de479e9fd48600600f6f4fc94ab048067300f",
+  "interpretation": "Hashes captured before this execution. This run is distinct from earlier unrecorded implementation runs; the baseline commit alone does not identify the repaired code."
+}

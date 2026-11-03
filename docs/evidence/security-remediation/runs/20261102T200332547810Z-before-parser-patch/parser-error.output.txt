@@ -1,0 +1,16 @@
+test_parse_error_keeps_status_without_raw_request (test_export.HttpParseErrorLogTests) ... FAIL
+
+======================================================================
+FAIL: test_parse_error_keeps_status_without_raw_request (test_export.HttpParseErrorLogTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<PROJECT_ROOT>/tests/test_export.py", line 333, in test_parse_error_keeps_status_without_raw_request
+    no_credentials(self, raw, {"parser_marker": marker})
+  File "<PROJECT_ROOT>/tests/test_export.py", line 71, in no_credentials
+    test.assertTrue(all(value not in text for value in variants),
+AssertionError: False is not true : A raw log or response contains a test credential
+
+----------------------------------------------------------------------
+Ran 1 test in 0.573s
+
+FAILED (failures=1)

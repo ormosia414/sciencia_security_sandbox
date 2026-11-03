@@ -10,11 +10,18 @@ trust assumptions, and investigation priorities. Then read the
 [verification results](docs/verification-results.md) for the methods, recorded
 normal behavior, evidence links, and limitations.
 
+For the later stages, see the [focused security assessment](docs/security-assessment.md)
+for pre-fix findings and [search/export remediation](docs/security-remediation.md)
+for implemented changes, regression results, evidence limitations, and the
+proposed permissions awaiting review. Earlier reports retain their historical
+meaning rather than describing the current interface.
+
 The [scope](SECURITY_SCOPE.md) and [original student brief](STUDENT_START_HERE.md)
 define the teaching task. These materials are provided for review; public
 publication is not a Module 1 deliverable requirement. Evidence uses environment
-placeholders and redacts credentials and debug identifiers. Active security
-testing remains outside the current task.
+placeholders and redacts credentials and debug identifiers. The original Module 1
+task excluded active security testing; later focused local work is documented
+separately.
 
 Supporting material includes the source in `app/`, sample data in `data/`,
 the verification script in `docs/verify_normal.py`, evidence in `docs/evidence/`,
@@ -67,6 +74,38 @@ python app/app.py
 Then open: `http://127.0.0.1:5000`
 
 The database is created automatically at `data/reviews.db`.
+
+## Database export
+
+The current `/export.db` endpoint requires an Authorization header:
+
+```sh
+curl --header 'Authorization: Bearer <EXPORT_TOKEN>' \
+  --output downloaded-reviews.db http://127.0.0.1:5000/export.db
+```
+
+Replace the placeholder locally with the configured sandbox value. The Bearer
+scheme is case-insensitive; use one space followed by the nonempty token.
+Missing, incorrect, empty, or malformed credentials return 403 with the same
+generic error. A `token` URL query parameter never grants permission, even when
+combined with a missing or incorrect header. CSV export is unchanged.
+
+Application request logs retain method, path, and status, without headers or
+query values. The supplied local server entry point (`python app/app.py`, or
+`run_local_server()` for a chosen local port) also omits query strings from
+Werkzeug access records before writing them. HTTP parser errors use only the
+standard status reason: the local handler discards raw diagnostic messages
+before inherited error logging and responses. This was checked for the single
+bad-request-syntax path in the [remediation report](docs/security-remediation.md),
+not every possible exception. Other launchers, WSGI servers, proxies, browsers,
+and clients need their own logging configuration; this project
+does not control their logs. Do not put credentials in URLs.
+
+The earlier reports and scripts remain historical baselines. In particular,
+`docs/verify_normal.py` and `docs/evidence/security-assessment/assess_local.py`
+expect the former query-token/logging behavior; their expectations do not define
+the current interface. Do not rerun them as current regression tests or rewrite
+their evidence to match these fixes.
 
 ## Internship scope
 

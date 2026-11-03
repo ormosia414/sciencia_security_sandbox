@@ -1,0 +1,8 @@
+test_raw_application_log_keeps_metadata_without_credentials (test_export.ExportCredentialTests) ... ok
+test_rejections_are_generic_and_do_not_use_legacy_query (test_export.ExportCredentialTests) ... ok
+test_valid_attachment_and_ignored_legacy_query (test_export.ExportCredentialTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.505s
+
+OK

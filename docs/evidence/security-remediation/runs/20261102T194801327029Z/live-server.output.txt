@@ -1,0 +1,6 @@
+test_real_server_raw_logs_and_export_controls (test_export.LiveExportLogTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.612s
+
+OK

@@ -3,10 +3,13 @@ import io
 import json
 import logging
 import os
+import re
+from hmac import compare_digest
 from collections import Counter
 from datetime import datetime, timezone
 
 from flask import Flask, Response, jsonify, render_template, request, send_file
+from werkzeug.serving import WSGIRequestHandler
 
 from config import APP_SECRET, ENABLE_DEBUG, INTERNAL_EXPORT_TOKEN, LOG_REQUEST_DETAILS
 from db import DB_PATH, connect, init_db
@@ -33,14 +36,28 @@ def load_provider_data():
         return json.load(f)
 
 
-def record_request():
+@app.after_request
+def record_request(response):
     if LOG_REQUEST_DETAILS:
-        logging.info("request path=%s args=%s", request.path, dict(request.args))
+        # Never include Authorization headers or query values in request logs.
+        logging.info("request method=%s path=%s status=%s",
+                     request.method, request.path, response.status_code)
+    return response
 
 
-@app.before_request
-def before_request():
-    record_request()
+class CredentialSafeRequestHandler(WSGIRequestHandler):
+    """Keep local development access logs useful without logging URL queries."""
+
+    def send_error(self, code, message=None, explain=None):
+        # Parser diagnostics can contain raw request lines or header values.
+        # Keep the status and standard reason, before inherited logging/output.
+        super().send_error(code)
+
+    def log_request(self, code="-", size="-"):
+        path = getattr(self, "path", "").split("?", 1)[0]
+        message = f"{getattr(self, 'command', '-')} {path} {self.request_version}"
+        message = message.translate(self._control_char_table)
+        self.log("info", '"%s" %s %s', message, code, size)
 
 
 @app.route("/")
@@ -90,16 +107,19 @@ def reviews():
     app_id = request.args.get("app_id", "")
     q = request.args.get("q", "")
 
-    # Intentionally simple implementation for the sandbox.
     sql = "SELECT review_id, app_id, rating, text, created_at, app_version, user_region FROM reviews WHERE 1=1"
+    params = []
     if app_id:
-        sql += f" AND app_id = '{app_id}'"
+        sql += " AND app_id = ?"
+        params.append(app_id)
     if q:
-        sql += f" AND text LIKE '%{q}%'"
+        sql += " AND text LIKE ?"
+        # Preserve SQLite LIKE semantics: % and _ remain wildcards.
+        params.append(f"%{q}%")
     sql += " ORDER BY created_at DESC LIMIT 200"
 
     with connect() as conn:
-        rows = [dict(r) for r in conn.execute(sql).fetchall()]
+        rows = [dict(r) for r in conn.execute(sql, params).fetchall()]
     return jsonify(rows)
 
 
@@ -147,9 +167,11 @@ def export_csv():
 
 @app.get("/export.db")
 def export_db():
-    # The token is intentionally a simple query parameter in this training sandbox.
-    token = request.args.get("token")
-    if token != INTERNAL_EXPORT_TOKEN:
+    # Bearer scheme is case-insensitive; require one space and a nonempty token.
+    credential = re.fullmatch(r"Bearer ([A-Za-z0-9._~+/-]+=*)",
+                              request.headers.get("Authorization", ""), re.IGNORECASE)
+    if credential is None or not compare_digest(
+            credential.group(1).encode("utf-8"), INTERNAL_EXPORT_TOKEN.encode("utf-8")):
         return jsonify({"error": "invalid token"}), 403
     return send_file(DB_PATH, as_attachment=True, download_name="reviews.db")
 
@@ -159,6 +181,13 @@ def health():
     return jsonify({"status": "ok", "time": datetime.now(timezone.utc).isoformat()})
 
 
-if __name__ == "__main__":
+def run_local_server(port=5000, *, use_reloader=None):
+    """Use the project's safe access logger for its loopback development server."""
     init_db()
-    app.run(host="127.0.0.1", port=5000, debug=ENABLE_DEBUG)
+    app.run(host="127.0.0.1", port=port, debug=ENABLE_DEBUG,
+            use_reloader=ENABLE_DEBUG if use_reloader is None else use_reloader,
+            request_handler=CredentialSafeRequestHandler)
+
+
+if __name__ == "__main__":
+    run_local_server()

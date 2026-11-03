@@ -1,0 +1,50 @@
+{
+  "group": "search",
+  "command": [
+    ".venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_search.py",
+    "-v"
+  ],
+  "started_at": "2026-11-02T20:05:09.510289+00:00",
+  "completed_at": "2026-11-02T20:05:10.204576+00:00",
+  "exit_status": 0,
+  "status": "PASS",
+  "test_methods_reported": 12,
+  "passed_test_methods": 12,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "expected failures": 0,
+  "unexpected successes": 0,
+  "output_file": "search.output.txt",
+  "source_hashes_before": {
+    "app/app.py": "681b419c8e497b08077bd3f500ae3c0c9d1683c21b8dc9a8f86e3fb2589b83a6",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+    "app/templates/index.html": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+    "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+    "tests/test_search.py": "ee80e35013e5c3e352cfb7240f2b5e57d60f23fa83ca3f21d5e44da1cdd2f949",
+    "tests/test_export.py": "ba04a056e49d367e1cb2cd384177e422d798ecfd9b6bf48ab1886c7db03878e0"
+  },
+  "source_hashes_after": {
+    "app/app.py": "681b419c8e497b08077bd3f500ae3c0c9d1683c21b8dc9a8f86e3fb2589b83a6",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/config.py": "d77d22458c6e819afcf621eb52853f5dcd8dc35a0da0c4ea785dc09e533b7217",
+    "app/templates/index.html": "dc56146e475544f06c8739e428abe66f5b478015bbe564cd9816b7920341b0c1",
+    "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+    "tests/test_search.py": "ee80e35013e5c3e352cfb7240f2b5e57d60f23fa83ca3f21d5e44da1cdd2f949",
+    "tests/test_export.py": "ba04a056e49d367e1cb2cd384177e422d798ecfd9b6bf48ab1886c7db03878e0"
+  },
+  "published_output_sha256": "fcaf7bd9f4711d76fdf6c78ffd6d2dfbf2608587bf9daba304dc07a926fae0a1"
+}
