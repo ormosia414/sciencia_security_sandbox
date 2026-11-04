@@ -130,34 +130,66 @@ or distinguish these results from older runs.
 
 ## Proposed permissions — not implemented
 
-I propose a simple Viewer/Operator model for the four operations. **Viewer** is
-for named reviewers or analysts who need to analyze approved review data.
-**Operator** is for maintainers responsible for imports and backups. This keeps
-data changes and backups separate from read-only analysis if the sandbox is shared.
+The Viewer/Operator direction has been accepted. **Viewer** is for approved
+reviewers or analysts; **Operator** is for maintainers responsible for imports
+and backups. Operator inherits all Viewer reading and CSV permissions, then adds
+import and full-database export. Both roles may read every app: `app_id` is only
+a filter, with no per-app permission model. The route rules and field choices
+below extend that direction and still need confirmation.
 These permissions are proposed and are not enforced by the current application.
-The proposal assumes both roles may read all applications; filtering by `app_id`
-is not a user-access boundary.
 
-| Operation | Unauthenticated | Viewer | Operator |
-|---|---|---|---|
-| Import reviews | Deny: changes data and history. | Deny: outside a read-only role. | Allow: responsible for ingestion. |
-| Read import history | Deny: requires an approved recipient. | Allow non-sensitive summaries: explains data freshness and counts. | Allow: supports diagnosis and auditing. |
-| Export CSV | Deny: bulk reading needs approval. | Allow: supports analysis of approved review data. | Allow: supports checking and approved extracts. |
-| Export full database | Deny: no approved backup authority. | Deny: exceeds the review-extract role. | Allow: supports controlled backup and maintenance. |
+I propose the following rules for all current routes in
+[app/app.py](../app/app.py), including Flask's static-file route. Unauthenticated
+callers and callers whose role cannot be recognized are denied protected
+operations by default. Minimal health information and non-sensitive styles are
+the only public content exceptions. Automatic `OPTIONS` has a separate, limited
+protocol-level exception described below.
 
-CSV contains review fields and ingestion timestamps. A full database also gives
-the recipient the schema, app mappings, and full history. I recommend limiting
-that broader download to Operators. Viewer history access would require messages
-and other returned fields to exclude credentials, raw exceptions, and sensitive
-operational detail; unsuitable fields would need exclusion or redaction.
-The existing shared export token authorizes one operation. It cannot identify
-a person or establish membership of either role.
+| HTTP method and path | Unauthenticated / unknown role | Viewer | Operator | Reason and data scope |
+|---|---|---|---|---|
+| `GET /` | Deny | Allow | Allow | The homepage reads per-app review counts and shows available operations. |
+| `GET /reviews` | Deny | Allow | Allow | Read reviews across all apps, optionally filtered by `app_id` and `q`; newest first, at most 200 rows. |
+| `GET /analysis/summary` | Deny | Allow | Allow | Read counts, average ratings, and common terms for one or all apps. Aggregates still reveal stored data. |
+| `POST /ingest` | Deny | Deny | Allow | Changes stored data and adds an import-history row. |
+| `GET /admin/runs` | Deny | Allow summary fields only | Allow maintenance history | Viewers need freshness and counts; Operators also need diagnostic context. See field limits below. |
+| `GET /export.csv` | Deny | Allow | Allow | Export all stored reviews and ingestion timestamps, without applying earlier search filters. |
+| `GET /export.db` | Deny | Deny | Allow | Download the whole database, including schema, app mappings, and full history, for controlled backup. |
+| `GET /health` | Allow | Allow | Allow | Current fields are `status: "ok"` and `time` (UTC). They provide minimal liveness information, not database or dependency health. |
+| `GET /static/<path:filename>` | Allow non-sensitive styles only | Same | Same | The current template loads `/static/style.css`. This exception does not approve future sensitive static files. |
 
-**Decisions to confirm.** Agree who receives each role, whether approved users
-may read all apps, and whether Viewers should export CSV and read non-sensitive
-history summaries. A single learner's local workflow may justify an explicit
-exception to default unauthenticated denial. Operator-only database backups and
-the specific history fields available to Viewers also need agreement.
+The read routes also support Flask's implicit `HEAD`; it must require the same
+permission as the corresponding `GET`, even without a response body. As a limited
+protocol-level exception, automatic `OPTIONS` may return supported-method
+information without authentication, but must not return business data or execute
+an operation. These framework behaviors must not create an alternate access path.
+
+Search and CSV expose the same approved review collection to both roles, but
+their output is not identical: search filters and caps results, while CSV exports
+all reviews and includes `ingested_at`. A full database additionally contains
+schema, app mappings, and full import history. That broader maintenance scope is
+why I recommend Operator-only database downloads.
+
+For Viewer history summaries, I propose an explicit allowlist: `run_id`, `app_id`,
+`started_at`, `fetched_count`, `inserted_count`, and `status`. The current
+`admin_runs()` uses `SELECT *` and also returns `message`. A future implementation
+must select the summary fields for Viewers instead of forwarding every column;
+free-text messages and raw exceptions should not enter that response. Operators
+may receive maintenance messages, but credentials and sensitive raw diagnostics
+should be excluded from their responses too.
+
+Every rule must be enforced on the server, including direct HTTP requests.
+Hiding an import button from Viewers would improve the interface but cannot
+authorize the route. The current shared Bearer token proves possession of one
+operation credential, not a person's identity or role. When role checks are
+implemented, database export must require Operator permission; the shared token
+must not remain an alternative route around that check. Whether to retain it as
+an additional requirement or replace it needs agreement, without adding roles.
+
+**Decisions to confirm.** Confirm who receives each role; the all-app read scope
+and Viewer CSV access; the proposed history allowlist and Operator message scope;
+and the limited public health/static exceptions. Also decide how future Operator
+authorization will replace or supplement the shared export credential. These are
+design decisions for the next implementation, not changes to current access.
 
 Recipients and retention periods for downloaded copies need a clear policy.
 The endpoint transfers a file; it does not enforce how the recipient stores or

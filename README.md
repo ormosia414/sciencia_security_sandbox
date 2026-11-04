@@ -15,7 +15,15 @@ normal server-access, and HTTP parsing-error logging paths. The supplied local
 startup entry point installs the server log handler used by the regressions.
 
 Viewer/Operator permissions are a proposal awaiting review, not implemented
-roles. Import, history, and CSV still have no caller-role checks; the database
+roles. The proposal covers all routes: Operators inherit Viewer reads and CSV
+export, then add import and full-database export. Both roles would be able to read
+all apps. Under the proposed model, only minimal health information and
+non-sensitive styles would be available without authentication. The
+[full method rules](docs/security-remediation.md#proposed-permissions--not-implemented)
+also distinguish limited automatic `OPTIONS` responses from protected `HEAD` requests.
+
+The homepage, review search, analysis summary, imports, history, and CSV export
+currently have no application-level identity or role checks. The database
 export token is a shared operation credential, not personal identity. This remains
 a local teaching app with demo configuration and development/debug settings,
 not a production-ready or comprehensively secured service.
