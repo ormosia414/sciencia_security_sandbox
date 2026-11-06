@@ -1,0 +1,109 @@
+{
+  "started_at": "2026-11-05T22:01:03.622742+00:00",
+  "timezone": "UTC",
+  "baseline_commit": "9330b11705013b3bfc2545db184e819823ae24d1",
+  "snapshot": "Uncommitted access-control implementation, identified by source hashes",
+  "source_before": {
+    "app/app.py": "ef34220e404ddaadc087170ae47a7fcb16d26648b643fe279cbb64097be1caef",
+    "app/config.py": "bff70b917aa0f2c62842f073c188599ccb7a9059c725e28f65499a234010d63f",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/templates/index.html": "cd402e8b1b7f79bc50e8e9a2b3c71739fd352264c7a990244f46a4548f8cc2d7",
+    "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+    "tests/test_search.py": "ebddcbd0f52c9dfb28ff2a219a2fb20ef82a9f3403aae3cd2618c09f62054ef7",
+    "tests/test_export.py": "c931df4a2d99f5d595442232d095fbf26c34aa94133c3aa9ac10ff6011a6df33",
+    "tests/test_access.py": "f5eefdb5a993b9cb0a61ac383ab9d08c92ec3af857178d4c9d8b6697dd167eab",
+    "docs/evidence/access-control/record_tests.py": "8fef74f2220068bdad91d5a954b51c652dbcf357f255db88d7ab087a56266314"
+  },
+  "groups": [
+    {
+      "name": "search",
+      "command": [
+        "<PYTHON_EXECUTABLE>",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_search.py",
+        "-v"
+      ],
+      "started_at": "2026-11-05T22:01:03.643112+00:00",
+      "finished_at": "2026-11-05T22:01:04.493289+00:00",
+      "exit_status": 0,
+      "test_methods": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 12,
+      "output": "search.output.txt"
+    },
+    {
+      "name": "access",
+      "command": [
+        "<PYTHON_EXECUTABLE>",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_access.py",
+        "-v"
+      ],
+      "started_at": "2026-11-05T22:01:04.493307+00:00",
+      "finished_at": "2026-11-05T22:01:05.490095+00:00",
+      "exit_status": 0,
+      "test_methods": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 10,
+      "output": "access.output.txt"
+    },
+    {
+      "name": "export-and-server",
+      "command": [
+        "<PYTHON_EXECUTABLE>",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_export.py",
+        "-v"
+      ],
+      "started_at": "2026-11-05T22:01:05.490114+00:00",
+      "finished_at": "2026-11-05T22:01:07.276676+00:00",
+      "exit_status": 0,
+      "test_methods": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 5,
+      "output": "export-and-server.output.txt"
+    }
+  ],
+  "finished_at": "2026-11-05T22:01:07.276699+00:00",
+  "source_after": {
+    "app/app.py": "ef34220e404ddaadc087170ae47a7fcb16d26648b643fe279cbb64097be1caef",
+    "app/config.py": "bff70b917aa0f2c62842f073c188599ccb7a9059c725e28f65499a234010d63f",
+    "app/db.py": "dafa77917871595965616c580f20d8e4795b0c26a11562187d9220cfc6dde9e7",
+    "app/templates/index.html": "cd402e8b1b7f79bc50e8e9a2b3c71739fd352264c7a990244f46a4548f8cc2d7",
+    "app/static/style.css": "2cb79f23c593d8cd20c2d60357a79867ecd2a200c223c4bbedf613008e2192be",
+    "data/provider_reviews.json": "045fc20b4b34446e7edca0cb2494268f215ed0001167411ed8a6c8bd4fa8fe2e",
+    "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384",
+    "tests/test_search.py": "ebddcbd0f52c9dfb28ff2a219a2fb20ef82a9f3403aae3cd2618c09f62054ef7",
+    "tests/test_export.py": "c931df4a2d99f5d595442232d095fbf26c34aa94133c3aa9ac10ff6011a6df33",
+    "tests/test_access.py": "f5eefdb5a993b9cb0a61ac383ab9d08c92ec3af857178d4c9d8b6697dd167eab",
+    "docs/evidence/access-control/record_tests.py": "8fef74f2220068bdad91d5a954b51c652dbcf357f255db88d7ab087a56266314"
+  },
+  "existing_runtime_unchanged": true,
+  "source_unchanged_during_run": true
+}

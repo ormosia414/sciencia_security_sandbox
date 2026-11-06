@@ -8,10 +8,10 @@ from hmac import compare_digest
 from collections import Counter
 from datetime import datetime, timezone
 
-from flask import Flask, Response, jsonify, render_template, request, send_file
+from flask import Flask, Response, g, jsonify, render_template, request, send_file
 from werkzeug.serving import WSGIRequestHandler
 
-from config import APP_SECRET, ENABLE_DEBUG, INTERNAL_EXPORT_TOKEN, LOG_REQUEST_DETAILS
+from config import APP_SECRET, ENABLE_DEBUG, LOG_REQUEST_DETAILS, VIEWER_TOKEN, OPERATOR_TOKEN
 from db import DB_PATH, connect, init_db
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,6 +23,57 @@ logging.basicConfig(filename=LOG_PATH, level=logging.INFO, format="%(asctime)s %
 
 app = Flask(__name__)
 app.secret_key = APP_SECRET
+app.config.update(VIEWER_TOKEN=VIEWER_TOKEN, OPERATOR_TOKEN=OPERATOR_TOKEN)
+
+# Endpoint names are developer-defined, never supplied as role claims by clients.
+ROLE_PERMISSIONS = {
+    "Viewer": {"index", "reviews", "summary", "admin_runs", "export_csv"},
+}
+ROLE_PERMISSIONS["Operator"] = ROLE_PERMISSIONS["Viewer"] | {"ingest", "export_db"}
+HISTORY_FIELDS = "run_id, app_id, started_at, fetched_count, inserted_count, status"
+TOKEN_PATTERN = r"[A-Za-z0-9._~+/-]+=*"
+
+
+def identify_role():
+    viewer = app.config.get("VIEWER_TOKEN", "")
+    operator = app.config.get("OPERATOR_TOKEN", "")
+    # Validate the whole pair before authorizing either role.
+    if not all(isinstance(value, str) and re.fullmatch(TOKEN_PATTERN, value)
+               for value in (viewer, operator)):
+        return None
+    if compare_digest(viewer.encode(), operator.encode()):
+        return None
+    credential = re.fullmatch(r"Bearer (" + TOKEN_PATTERN + r")",
+                              request.headers.get("Authorization", ""), re.IGNORECASE)
+    if credential is None:
+        return None
+    supplied = credential.group(1).encode("utf-8")
+    is_viewer = compare_digest(supplied, viewer.encode("utf-8"))
+    is_operator = compare_digest(supplied, operator.encode("utf-8"))
+    return "Operator" if is_operator else "Viewer" if is_viewer else None
+
+
+@app.before_request
+def enforce_permissions():
+    # Let Flask handle unmatched routes/methods without exposing route content.
+    if request.url_rule is None:
+        return None
+    # Only Flask-generated OPTIONS is public: it advertises methods, not data.
+    if request.method == "OPTIONS" and request.url_rule.provide_automatic_options:
+        return None
+    if request.endpoint == "health":
+        return None
+    if request.endpoint == "static":
+        if request.view_args.get("filename") == "style.css":
+            return None
+        return jsonify({"error": "not found"}), 404
+    g.role = identify_role()
+    if g.role is None:
+        return (jsonify({"error": "authentication required"}), 401,
+                {"WWW-Authenticate": "Bearer"})
+    if request.endpoint not in ROLE_PERMISSIONS[g.role]:
+        return jsonify({"error": "forbidden"}), 403
+
 
 APP_NAMES = {
     "com.sciencia.focus": "Focus AI",
@@ -67,7 +118,7 @@ def index():
             row["app_id"]: row["n"]
             for row in conn.execute("SELECT app_id, COUNT(*) AS n FROM reviews GROUP BY app_id").fetchall()
         }
-    return render_template("index.html", apps=APP_NAMES, counts=counts)
+    return render_template("index.html", apps=APP_NAMES, counts=counts, can_ingest=g.role == "Operator")
 
 
 @app.post("/ingest")
@@ -148,7 +199,7 @@ def summary():
 @app.get("/admin/runs")
 def admin_runs():
     with connect() as conn:
-        rows = [dict(r) for r in conn.execute("SELECT * FROM ingestion_runs ORDER BY run_id DESC LIMIT 100").fetchall()]
+        rows = [dict(r) for r in conn.execute("SELECT " + HISTORY_FIELDS + " FROM ingestion_runs ORDER BY run_id DESC LIMIT 100").fetchall()]
     return jsonify(rows)
 
 
@@ -167,12 +218,7 @@ def export_csv():
 
 @app.get("/export.db")
 def export_db():
-    # Bearer scheme is case-insensitive; require one space and a nonempty token.
-    credential = re.fullmatch(r"Bearer ([A-Za-z0-9._~+/-]+=*)",
-                              request.headers.get("Authorization", ""), re.IGNORECASE)
-    if credential is None or not compare_digest(
-            credential.group(1).encode("utf-8"), INTERNAL_EXPORT_TOKEN.encode("utf-8")):
-        return jsonify({"error": "invalid token"}), 403
+    # Central authorization requires Operator; no legacy credential fallback.
     return send_file(DB_PATH, as_attachment=True, download_name="reviews.db")
 
 

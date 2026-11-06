@@ -1,0 +1,17 @@
+test_combined_keyword_only_matches_another_application (test_search.SearchRegressionTests) ... ok
+test_combined_match (test_search.SearchRegressionTests) ... ok
+test_descending_order_and_limit_200 (test_search.SearchRegressionTests) ... ok
+test_existing_like_wildcards (test_search.SearchRegressionTests) ... ok
+test_matching_keyword (test_search.SearchRegressionTests) ... ok
+test_no_filters (test_search.SearchRegressionTests) ... ok
+test_nonexistent_application (test_search.SearchRegressionTests) ... ok
+test_nonmatching_keyword (test_search.SearchRegressionTests) ... ok
+test_ordinary_apostrophes_in_application_and_text (test_search.SearchRegressionTests) ... ok
+test_real_application (test_search.SearchRegressionTests) ... ok
+test_recorded_app_id_injection_returns_no_rows (test_search.SearchRegressionTests) ... ok
+test_recorded_keyword_injection_preserves_application_filter (test_search.SearchRegressionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.591s
+
+OK

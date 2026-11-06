@@ -40,7 +40,7 @@ def copied_runtime(test):
 
 def test_tokens():
     return {name: secrets.token_urlsafe(24) + "/+="
-            for name in ("valid", "wrong", "legacy", "malformed")}
+            for name in ("valid", "viewer", "wrong", "legacy", "malformed")}
 
 
 def credential_cases(tokens):
@@ -48,19 +48,20 @@ def credential_cases(tokens):
     return [
         ("valid-header", "Bearer " + valid, {}, 200),
         ("lowercase-scheme", "bearer " + valid, {}, 200),
-        ("missing-header", None, {}, 403),
-        ("empty-header", "", {}, 403),
-        ("empty-bearer", "Bearer ", {}, 403),
-        ("scheme-without-value", "Bearer", {}, 403),
-        ("wrong-value", "Bearer " + tokens["wrong"], {}, 403),
-        ("wrong-scheme", "Basic " + tokens["malformed"], {}, 403),
-        ("extra-space", "Bearer  " + valid, {}, 403),
-        ("tab-separator", "Bearer\t" + valid, {}, 403),
-        ("extra-field", "Bearer " + valid + " extra", {}, 403),
-        ("non-ascii-value", "Bearer \u00e9", {}, 403),
-        ("legacy-only", None, {"token": valid}, 403),
-        ("legacy-with-wrong-header", "Bearer " + tokens["wrong"], {"token": valid}, 403),
-        ("legacy-with-empty-header", "Bearer ", {"token": valid}, 403),
+        ("viewer-denied", "Bearer " + tokens["viewer"], {}, 403),
+        ("missing-header", None, {}, 401),
+        ("empty-header", "", {}, 401),
+        ("empty-bearer", "Bearer ", {}, 401),
+        ("scheme-without-value", "Bearer", {}, 401),
+        ("wrong-value", "Bearer " + tokens["wrong"], {}, 401),
+        ("wrong-scheme", "Basic " + tokens["malformed"], {}, 401),
+        ("extra-space", "Bearer  " + valid, {}, 401),
+        ("tab-separator", "Bearer\t" + valid, {}, 401),
+        ("extra-field", "Bearer " + valid + " extra", {}, 401),
+        ("non-ascii-value", "Bearer \u00e9", {}, 401),
+        ("legacy-only", None, {"token": valid}, 401),
+        ("legacy-with-wrong-header", "Bearer " + tokens["wrong"], {"token": valid}, 401),
+        ("legacy-with-empty-header", "Bearer ", {"token": valid}, 401),
         ("valid-header-ignores-legacy", "Bearer " + valid, {"token": tokens["legacy"]}, 200),
     ]
 
@@ -89,7 +90,9 @@ def verify_database(test, body, destination, fixture):
 def load_module(name, path):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    # Flask locates templates/static files through the registered module path.
+    with patch.dict(sys.modules, {name: module}):
+        spec.loader.exec_module(module)
     return module
 
 
@@ -108,7 +111,8 @@ class ExportCredentialTests(unittest.TestCase):
 
         self.addCleanup(close_test_handlers)
         config = load_module("config", self.runtime / "app/config.py")
-        config.INTERNAL_EXPORT_TOKEN = self.tokens["valid"]
+        config.OPERATOR_TOKEN = self.tokens["valid"]
+        config.VIEWER_TOKEN = self.tokens["viewer"]
         self.db = load_module("db", self.runtime / "app/db.py")
         with patch.dict(sys.modules, {"config": config, "db": self.db}):
             self.module = load_module("export_regression_app", self.runtime / "app/app.py")
@@ -120,7 +124,8 @@ class ExportCredentialTests(unittest.TestCase):
         self.fixture = json.loads((self.runtime / "data/provider_reviews.json").read_text())
         self.client = self.module.app.test_client()
         for app_id in self.fixture:
-            response = self.client.post("/ingest", data={"app_id": app_id})
+            response = self.client.post("/ingest", data={"app_id": app_id},
+                                        headers={"Authorization": "Bearer " + self.tokens["valid"]})
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.get_json()["inserted"], 3)
 
@@ -137,13 +142,13 @@ class ExportCredentialTests(unittest.TestCase):
 
     def test_rejections_are_generic_and_do_not_use_legacy_query(self):
         for label, header, params, status in credential_cases(self.tokens):
-            if status != 403:
+            if status == 200:
                 continue
             with self.subTest(case=label):
                 headers = {} if header is None else {"Authorization": header}
                 with self.client.get("/export.db", query_string=params, headers=headers) as response:
-                    self.assertEqual(response.status_code, 403)
-                    self.assertTrue(response.get_json() == {"error": "invalid token"},
+                    self.assertEqual(response.status_code, status)
+                    self.assertTrue(response.get_json() == {"error": "forbidden" if status == 403 else "authentication required"},
                                     "Rejection must use the generic error body")
                     no_credentials(self, response.get_data(as_text=True) + str(response.headers), self.tokens)
 
@@ -159,7 +164,7 @@ class ExportCredentialTests(unittest.TestCase):
         lines = [line for line in raw.splitlines() if "request method=GET path=/export.db status=" in line]
         self.assertEqual(len(lines), len(credential_cases(self.tokens)))
         self.assertTrue(any("status=200" in line for line in lines))
-        self.assertTrue(any("status=403" in line for line in lines))
+        self.assertTrue(any("status=401" in line for line in lines))
 
 
 class LiveExportLogTests(unittest.TestCase):
@@ -174,13 +179,13 @@ class LiveExportLogTests(unittest.TestCase):
         except PermissionError:
             self.skipTest("Loopback listening is restricted; live server log verification was not executed")
         # Private test-only config, read before importing the copied application.
-        (runtime / "test-credential.json").write_text(json.dumps({"token": tokens["valid"]}))
+        (runtime / "test-credential.json").write_text(json.dumps({"token": tokens["valid"], "viewer": tokens["viewer"]}))
         launcher = runtime / "launch_export_test.py"
         launcher.write_text(
             "import sys,json,logging\nfrom pathlib import Path\n"
             "sys.path.insert(0,str(Path(__file__).parent/'app'))\n"
             "import config\n"
-            "config.INTERNAL_EXPORT_TOKEN=json.loads(Path('test-credential.json').read_text())['token']\n"
+            "config.OPERATOR_TOKEN=json.loads(Path('test-credential.json').read_text())['token']\nconfig.VIEWER_TOKEN=json.loads(Path('test-credential.json').read_text())['viewer']\n"
             "import app\n"
             "logging.getLogger('werkzeug').addHandler(logging.FileHandler('logs/server-access.raw.log'))\n"
             "app.run_local_server(int(sys.argv[1]),use_reloader=False)\n")
@@ -214,8 +219,31 @@ class LiveExportLogTests(unittest.TestCase):
         else:
             self.fail("Owned loopback server did not become ready")
         for app_id in fixture:
-            with opener.open(Request(base + "/ingest", data=urlencode({"app_id": app_id}).encode()), timeout=5) as response:
+            with opener.open(Request(base + "/ingest", data=urlencode({"app_id": app_id}).encode(),
+                                            headers={"Authorization": "Bearer " + tokens["valid"]}), timeout=5) as response:
                 self.assertEqual(json.load(response)["inserted"], 3)
+        # Exercise role credentials in actual server logs, not only export headers.
+        for role_key in ("viewer", "valid", "wrong"):
+            for path in ("/reviews", "/analysis/summary", "/admin/runs", "/export.csv"):
+                try:
+                    response = opener.open(Request(base + path,
+                        headers={"Authorization": "Bearer " + tokens[role_key]}), timeout=5)
+                except HTTPError as error:
+                    response = error
+                with response:
+                    self.assertEqual(response.code, 401 if role_key == "wrong" else 200)
+                    no_credentials(self, response.read().decode(), tokens)
+        for role_key, expected in (("viewer", 403), ("wrong", 401)):
+            req = Request(base + "/ingest?" + urlencode({"token": tokens["legacy"]}),
+                data=urlencode({"app_id": next(iter(fixture))}).encode(),
+                headers={"Authorization": "Bearer " + tokens[role_key]})
+            try:
+                response = opener.open(req, timeout=5)
+            except HTTPError as error:
+                response = error
+            with response:
+                self.assertEqual(response.code, expected)
+                no_credentials(self, response.read().decode(), tokens)
         expected_statuses = []
         for label, header, params, expected_status in credential_cases(tokens):
             with self.subTest(case=label):
@@ -233,7 +261,7 @@ class LiveExportLogTests(unittest.TestCase):
                     if expected_status == 200:
                         verify_database(self, body, runtime / (label + ".db"), fixture)
                     else:
-                        self.assertTrue(json.loads(body) == {"error": "invalid token"},
+                        self.assertTrue(json.loads(body) == {"error": "forbidden" if expected_status == 403 else "authentication required"},
                                         "Rejection must remain generic")
                         no_credentials(self, body.decode(), tokens)
                 expected_statuses.append(expected_status)
@@ -251,6 +279,10 @@ class LiveExportLogTests(unittest.TestCase):
         self.assertEqual([int(line.rsplit("status=", 1)[1]) for line in app_lines], expected_statuses)
         self.assertEqual([int(line.split('HTTP/1.1" ', 1)[1].split()[0]) for line in access_lines], expected_statuses)
         self.assertTrue(all("?" not in line for line in access_lines), "Access log must omit query strings")
+        for path in ("/reviews", "/analysis/summary", "/admin/runs", "/export.csv"):
+            lines = [line for line in server_raw.splitlines() if '"GET ' + path + ' HTTP/1.1"' in line]
+            self.assertEqual([int(line.split('HTTP/1.1" ', 1)[1].split()[0]) for line in lines],
+                             [200, 200, 401], "Both roles and invalid credentials must have real access records")
 
 
 class HttpParseErrorLogTests(unittest.TestCase):
@@ -263,13 +295,13 @@ class HttpParseErrorLogTests(unittest.TestCase):
                 port = sock.getsockname()[1]
         except PermissionError:
             self.skipTest("Loopback listening is restricted; parser error log check was not executed")
-        (runtime / "test-credential.json").write_text(json.dumps({"token": marker}))
+        (runtime / "test-credential.json").write_text(json.dumps({"token": marker, "viewer": secrets.token_urlsafe(32)}))
         launcher = runtime / "launch_parser_test.py"
         launcher.write_text(
             "import sys,json,logging\nfrom pathlib import Path\n"
             "sys.path.insert(0,str(Path(__file__).parent/'app'))\n"
             "import config\n"
-            "config.INTERNAL_EXPORT_TOKEN=json.loads(Path('test-credential.json').read_text())['token']\n"
+            "config.OPERATOR_TOKEN=json.loads(Path('test-credential.json').read_text())['token']\nconfig.VIEWER_TOKEN=json.loads(Path('test-credential.json').read_text())['viewer']\n"
             "import app\n"
             "logging.getLogger('werkzeug').addHandler(logging.FileHandler('logs/server-access.raw.log'))\n"
             "app.run_local_server(int(sys.argv[1]),use_reloader=False)\n")
@@ -320,7 +352,7 @@ class HttpParseErrorLogTests(unittest.TestCase):
                 received.extend(part)
         status_line = bytes(received).split(b"\r\n", 1)[0]
         self.assertEqual(status_line.split()[1:2], [b"400"],
-                         "Protocol parsing must reject the request with 400, not Flask's 403")
+                         "Protocol parsing must reject the request with 400, not an application authentication response")
         stop_owned_server()
         self.assertIsNotNone(process.poll(), "Owned parser-test server must be stopped")
         server_raw = (runtime / "logs/server-access.raw.log").read_text()

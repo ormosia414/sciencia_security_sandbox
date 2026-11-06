@@ -1,0 +1,15 @@
+test_all_protected_routes_reject_invalid_identity_without_writes (test_access.AccessControlTests) ... ok
+test_both_roles_read_same_data_and_csv (test_access.AccessControlTests) ... ok
+test_head_and_options_follow_method_rules_without_writes (test_access.AccessControlTests) ... ok
+test_missing_empty_duplicate_or_malformed_configuration_fails_closed (test_access.AccessControlTests) ... ok
+test_operator_download_is_valid_sqlite (test_access.AccessControlTests) ... ok
+test_public_exceptions_are_narrow (test_access.AccessControlTests) ... ok
+test_raw_application_logs_cover_roles_and_denials_without_secrets (test_access.AccessControlTests) ... ok
+test_role_claims_and_legacy_credentials_cannot_elevate (test_access.AccessControlTests) ... ok
+test_viewer_denials_do_not_write_and_operator_import_works (test_access.AccessControlTests) ... ok
+test_viewer_history_allowlist_and_operator_safe_history (test_access.AccessControlTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.699s
+
+OK

@@ -9,8 +9,8 @@ Recorded verification runs: 2026-10-17
 This is a historical pre-remediation record. The commands below describe the
 retained verifier and earlier interface; use them only with a matching earlier
 source copy. For current code and acceptance commands, see the
-[remediation report](security-remediation.md) and its
-[evidence guide](evidence/security-remediation/README.md).
+[access-control report](access-control.md) and its
+[evidence guide](evidence/access-control/README.md).
 
 ## 1. Purpose and evidence
 

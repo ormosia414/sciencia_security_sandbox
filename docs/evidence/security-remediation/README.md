@@ -1,10 +1,15 @@
 # Remediation Evidence Guide
 
 Use the [remediation report](../../security-remediation.md) for the analysis and
-permissions proposal. This guide identifies the supporting records and how to
+earlier permission design. This guide identifies the supporting records and how to
 reproduce the retained tests. It does not alter the recorded JSON or outputs.
 
-## Preferred run for the current code
+This guide describes the search/export-only snapshot before role enforcement.
+Source references, credential counts, and reproduction instructions below refer
+to delivery commit `c7a64f2`, not the current role-aware test files. For current
+behavior and regressions, use the [access-control evidence guide](../access-control/README.md).
+
+## Preferred run for the pre-role repair snapshot
 
 Start with
 [20261102T200429152769Z-after-parser-patch](runs/20261102T200429152769Z-after-parser-patch/run-summary.json).
@@ -30,8 +35,9 @@ inside the summary.
 When the tests ran, the fixes were uncommitted changes on baseline
 `c61504d80935fba0ab60abe0330a3712518425b4`. Delivery commit
 `c7a64f2fb187697131bc585714b863f4ab15b632` was created later. Each of the nine
-listed source, fixture, and test file hashes matches the run's pre/post hashes,
-the corresponding Git blob in that delivery commit, and the current checkout.
+listed source, fixture, and test file hashes matches the run's pre/post hashes
+and the corresponding Git blob in that delivery commit. Later role-enforcement
+changes have different source and test hashes.
 This establishes file correspondence, not execution against a future commit.
 The run records' uncommitted-worktree declaration remains accurate for execution
 time. Earlier inventories and unrelated document/evidence bytes are not part
@@ -83,7 +89,8 @@ this path, not all error handling in other servers or configurations.
 
 ## Reproduction
 
-From the project root, with its existing compatible Python environment:
+From the project root of a matching `c7a64f2` copy, with its existing compatible
+Python environment:
 
 ```sh
 .venv/bin/python -B -m unittest discover -s tests -p test_search.py -v

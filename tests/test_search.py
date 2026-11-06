@@ -6,6 +6,7 @@ Flask's test client exercises the route without opening a listening socket.
 import importlib.util
 import json
 import logging
+import secrets
 from pathlib import Path
 import shutil
 import sys
@@ -23,7 +24,9 @@ TRAVEL = "com.sciencia.travel"
 def load_module(name, path):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    # Flask locates templates/static files through the registered module path.
+    with patch.dict(sys.modules, {name: module}):
+        spec.loader.exec_module(module)
     return module
 
 
@@ -45,6 +48,9 @@ class SearchRegressionTests(unittest.TestCase):
 
         cls.addClassCleanup(close_test_handlers)
         config = load_module("config", cls.runtime / "app/config.py")
+        config.VIEWER_TOKEN = secrets.token_urlsafe(32)
+        config.OPERATOR_TOKEN = secrets.token_urlsafe(32)
+        cls.viewer_token = config.VIEWER_TOKEN
         cls.db = load_module("db", cls.runtime / "app/db.py")
         # Imports resolve to the copied modules, not the project's runtime paths.
         with patch.dict(sys.modules, {"config": config, "db": cls.db}):
@@ -72,7 +78,8 @@ class SearchRegressionTests(unittest.TestCase):
                      ") VALUES (?, ?, ?, ?, ?, ?, ?)", [row[c] for c in columns])
 
     def assert_reviews(self, params, expected):
-        response = self.client.get("/reviews", query_string=params)
+        response = self.client.get("/reviews", query_string=params,
+                                   headers={"Authorization": "Bearer " + self.viewer_token})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.mimetype, "application/json")
         actual = response.get_json()

@@ -10,6 +10,7 @@
     <h1>Review Intelligence Sandbox</h1>
     <p>Local training application for review ingestion and lightweight analysis.</p>
 
+    {% if can_ingest %}
     <section>
       <h2>Ingest sample reviews</h2>
       {% for app_id, name in apps.items() %}
@@ -21,6 +22,9 @@
       {% endfor %}
     </section>
 
+    {% endif %}
+    <p>Protected requests require a Bearer header. Ordinary browser links and forms
+      do not automatically attach it; use a header-capable client.</p>
     <section>
       <h2>Useful endpoints</h2>
       <ul>
